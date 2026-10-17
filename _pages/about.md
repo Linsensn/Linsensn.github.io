@@ -18,8 +18,8 @@ redirect_from:
 
 ---
 
-<details open>
-<summary><strong>教育背景</strong></summary>
+<details class="fold" markdown="1" open>
+<summary><h2>教育背景</h2></summary>
 
 ### 郑州大学 · 计算机与人工智能学院 **计算机科学与技术 · 本科**
 `2023.09 – 至今` - GPA 3.67 / 4.0，专业排名 37 / 287（前12.9%）
