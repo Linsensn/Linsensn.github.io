@@ -18,8 +18,9 @@ redirect_from:
 
 ---
 
-<button class="accordion">## 教育背景</button>
+<button class="accordion">教育背景</button>
 <div class="panel">
+  
 ### 郑州大学 · 计算机与人工智能学院
 **计算机科学与技术 · 本科**　`2023.09 – 至今`
 - GPA 3.67 / 4.0，专业排名 37 / 287（前12.9%）
@@ -29,6 +30,7 @@ redirect_from:
 
 ### 大连理工大学 · 计算机技术（推免）
 **专业型硕士｜预计2027.09入学**
+
 </div>
 ---
 
