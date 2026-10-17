@@ -49,8 +49,9 @@ redirect_from:
 
 <details class="fold" open>
   <summary>项目经历</summary>
-  <div>
-    <!-- <p style="color: #666; margin-bottom: 1.5em;">以下代码全部开源，源码与演示详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a>。</p> -->
+  <div> 
+> 以下代码全部开源，源码详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a> / 每个项目最后有直达链接。
+> 完整技术细节、量化指标、项目演示请跳转项目页面查看：[项目经历](/portfolio/)
 
     <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
       <span>WebAR 轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
@@ -63,7 +64,7 @@ redirect_from:
       <li><strong>团队管理：</strong>制定 Issue 驱动开发、Git 分支、PR 评审质控门禁，统一团队数据库迁移、接口定义、代码注释全套开发规范。</li>
       <li><strong>量化成果：</strong>模型 mAP50 达到 0.978，实现纯 CPU 毫秒级推理；依靠缓存、异步限流策略保障高并发图像请求下系统零宕机；完成整套端到端 WebAR 业务闭环，容器化可直接部署上线。</li>
     </ul>
-    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>YOLOv8-Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/bookway" target="_blank">源码</a></p>
+    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>YOLOv8-Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/bookway" target="_blank">github源码</a> · </p><i class="fab fa-gitee"></i><a href="https://gitee.com/bookway-studio/bookway" target="_blank">Gitee 源码</a>
 
 
     <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 2em; margin-bottom: 0.5em;">
