@@ -18,7 +18,7 @@ redirect_from:
 
 ---
 
-<button class="accordion">教育背景</button>
+<button class="accordion active">## 教育背景</button>
 <div class="panel">
   
 ### 郑州大学 · 计算机与人工智能学院
