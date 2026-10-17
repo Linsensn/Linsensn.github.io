@@ -23,7 +23,7 @@ redirect_from:
 
 <div markdown="1">
 
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+<h2 style="display: flex; justify-content: space-between; align-items: baseline; ">
   <span>郑州大学（211） · 计算机科学与技术 · 本科</span>
   <span style="font-weight: normal; color: #666;"><code>2023.09 - 2027.07</code></span>
 </h2>
@@ -32,7 +32,7 @@ redirect_from:
 - 荣誉：校级二等奖学金、校级三好学生(2023‑2024)；蓝桥杯省三等奖、挑战杯校级铜奖
 - 当前大四，无课业压力，可立即到岗，每周5天，可连续实习8个月以上
 
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+<h2 style="display: flex; justify-content: space-between; align-items: baseline; ">
   <span>大连理工大学（985） · 计算机技术（推免） · 专业型硕士</span>
   <span style="font-weight: normal; color: #666;"><code>2027.09 - 2030.07（预计）</code></span>
 </h2>
@@ -50,7 +50,7 @@ redirect_from:
 
 > 以下为项目概览，完整技术细节、量化指标请跳转项目页面查看：[项目经历](/portfolio/)
 
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+<h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>WebAR轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2025.09‑2026.01</code></span>
 </h2>
@@ -58,7 +58,7 @@ redirect_from:
 面向图书馆实景检索业务，在云端无 GPU 的严苛硬件约束下，实现浏览器端无需 APP 的实景导引。<br>
 **技术栈：YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、Redis、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/bookway)
 
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+<h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>基于大语言模型的多模态Agent伴学交互系统 ｜ 技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2026.05‑2026.07</code></span>
 </h2>
@@ -66,7 +66,7 @@ redirect_from:
 面向学生自主备考场景，搭建多模态智能伴学 Agent，实现异构学习资料解析与大模型对话答疑闭环。<br>
 **技术栈：FastAPI、PaddleOCR、DeepSeek、Pydantic、SSE、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/LiteKnow)
 
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+<h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>基于大语言模型的高并发推理与微调系统 ｜ 技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2026.06‑2026.08</code></span>
 </h2>
@@ -102,31 +102,31 @@ redirect_from:
 .page__content p,
 .page__content li,
 .page__content dl {
-  font-size: 0.7em !important;
-  line-height: 1.7 !important;
+  font-size: 0.75em !important;
+  line-height: 1.5 !important;
 }
 
 /* 2. 重新指定各级标题大小，确保大小层级分明 */
 .page__content h1 {
-  font-size: 1.5em !important;
+  font-size: 1.2em !important;
   margin-bottom: 0.6em !important;
 }
 
 .page__content h2 {
-  font-size: 1.3em !important;
+  font-size: 1.0em !important;
   /* border-bottom: 1px solid #e5e5e5;*/
   padding-bottom: 0.3em;
 }
 
 .page__content h3 {
-  font-size: 1.15em !important;
+  font-size: 0.9em !important;
   /* 如果要加粗，加上下面这行 */
   font-weight: bold !important; 
 }
 
 /* 将折叠标题字号设置为 h1 级别 */
 details.fold > summary {
-  font-size: 1.5em !important;   /* 核心：设置为和 h1 一样大 */
+  font-size: 1.2em !important;   /* 核心：设置为和 h1 一样大 */
   font-weight: bold !important;  /* 确保加粗 */
   color: #3f3f3f !important;
   cursor: pointer;
