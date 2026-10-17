@@ -19,7 +19,7 @@ redirect_from:
 ---
 
 <details class="fold" open>
-<summary><h2>教育背景</h2></summary>
+<summary>教育背景</summary>
 
 <div markdown="1">
 
