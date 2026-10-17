@@ -16,7 +16,7 @@ redirect_from:
 
 <div style="text-align: center; margin-bottom: -4em;">
   <h2 style="font-size: 3em; margin-bottom: 0.2em;">刘欣然</h2>
-  <p style="margin-bottom: -8em; color: #555;">
+  <p style="margin-bottom: 0.5em; color: #555;">
     <i class="fas fa-mobile-alt" style="width: 16px; text-align: center; margin-right: 4px;"></i> 15903682174（微信同号）
     <span style="margin: 0 8px; color: #ccc;">|</span> 
     <i class="fas fa-envelope" style="width: 16px; text-align: center; margin-right: 4px;"></i> <a href="mailto:2103123944@qq.com">2103123944@qq.com</a>
