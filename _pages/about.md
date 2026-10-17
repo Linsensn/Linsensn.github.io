@@ -9,11 +9,8 @@ redirect_from:
 ---
 
 我是**刘欣然**，郑州大学计算机科学与技术本科大四，已保研大连理工大学计算机技术专硕（2027年9月入学）。
-
 拥有10个月稳定实习空档，可从10月下旬全职实习至2027年8月，时间充裕无课业负担。主攻后端与AI工程方向，熟练使用 Python、PyTorch、FastAPI，了解模型LoRA微调、量化压缩、推理服务、端侧部署相关技术。作为技术负责人完成3项完整项目，能够独立完成算法处理到后端工程落地的全流程开发，具备问题排查与服务调优实践经验。
-
 期望寻找**后端 / AI 方向日常实习**，可快速到岗，接受郑州、北京以及远程异地实习，希望在工业业务场景中积累工程实战经验。
-
 > 查看完整简历：[我的简历](/cv/)
 
 <details class="fold" open>
@@ -40,11 +37,12 @@ redirect_from:
 </details>
 
 <details class="fold" open>
-<summary>项目经历</summary>
+<summary>
+  项目经历
+  <span> > 以下为项目概览，完整技术细节、量化指标请跳转项目页面查看：[项目经历](/portfolio/)</span>
+</summary>
 
 <div markdown="1">
-
-> 以下为项目概览，完整技术细节、量化指标请跳转项目页面查看：[项目经历](/portfolio/)
 
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>WebAR轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
