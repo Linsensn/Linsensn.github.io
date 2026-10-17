@@ -1,3 +1,10 @@
+<style>
+  /* 隐藏页面顶部的 CV 大标题，但保留浏览器标签页的标题 */
+  h1.page__title {
+    display: none !important;
+  }
+</style>
+
 /* 1. 调整正文字号 */
 .page__content p,
 .page__content li,
