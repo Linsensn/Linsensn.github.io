@@ -1,26 +1,18 @@
 <script>
-function bindAccordion(){
-  const accList = document.getElementsByClassName("accordion");
-  for(let i = 0; i < accList.length; i++){
-    accList[i].onclick = function(){
-      const pTag = this.parentElement;
-      const panel = pTag.nextElementSibling;
-      // 增加判空，防止找不到面板时报错
-      if(!panel) return;
-      this.classList.toggle("active");
-      if(panel.style.maxHeight){
-        panel.style.maxHeight = null;
-      }else{
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
-    }
-  }
-}
-// 双重保险，等页面DOM加载完成后绑定事件
-if(document.readyState === "loading"){
-  document.addEventListener('DOMContentLoaded', bindAccordion);
-}else{
-  bindAccordion();
-}
-window.addEventListener('load', bindAccordion);
+// 等待DOM加载完成再绑定事件
+document.addEventListener('DOMContentLoaded', function(){
+  const triggers = document.querySelectorAll('.collapse-trigger');
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function(){
+      // 获取外层h2标签
+      const h2 = this.closest('h2');
+      // 获取紧跟h2的下一个元素，就是折叠内容块
+      const block = h2.nextElementSibling;
+      if(!block) return;
+
+      this.classList.toggle('expanded');
+      block.classList.toggle('open');
+    })
+  })
+})
 </script>
