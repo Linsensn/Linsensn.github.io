@@ -87,7 +87,7 @@ redirect_from:
 
 
 <style>
-/* 1. 调整正文字号 */
+/* /* 1. 调整正文字号 */
 .page__content p,
 .page__content li,
 .page__content dl {
@@ -180,5 +180,5 @@ details.fold[open] > summary::before {
 .page__content blockquote p {
   margin-bottom: 0 !important; 
   margin-top: 0 !important;
-}
+} */
 </style>
