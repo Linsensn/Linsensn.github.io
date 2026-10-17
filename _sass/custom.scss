@@ -98,3 +98,41 @@ details.fold[open] > summary::before {
   margin-bottom: 0 !important; 
   margin-top: 0 !important;
 }
+
+/* ================= 侧边栏样式定制 ================= */
+
+/* 1. 名字居中 & 调整字号 */
+.author__name {
+  text-align: center !important;      /* 名字居中 */
+  font-size: 1.3em !important;        /* 名字的字号，可自由调整 */
+  margin-top: 0.8em !important;
+  margin-bottom: 0.3em !important;
+}
+
+/* 2. 个人简介居中 & 调整字号 */
+.author__bio {
+  text-align: center !important;      /* 简介也跟着居中，视觉更统一 */
+  font-size: 1.0em !important;        /* 简介字号 */
+  line-height: 1.5 !important;
+  color: #555 !important;
+}
+
+/* 3. 调整联系方式列表（定位、学校等）的字号 */
+.author__urls {
+  font-size: 1.0em !important;        /* 联系方式列表的字号 */
+  margin-top: 1em !important;
+}
+
+/* 如果你希望联系方式也居中排列（如果想保持左对齐，这段可以不复制） */
+.author__urls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;            /* 改成 center 就是居中 */
+  padding-left: 20px;                 /* 稍微往右缩进一点，配合左侧图标 */
+}
+
+// /* 4. 调整头像大小（可选，如果你觉得头像也需要微调） */
+// .author__avatar img {
+//   max-width: 160px !important;        /* 头像最大宽度 */
+//   border-radius: 50%;                 /* 保持圆形 */
+// }
