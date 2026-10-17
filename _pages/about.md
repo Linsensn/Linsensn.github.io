@@ -3,6 +3,7 @@ permalink: /
 title: "Xinran Liu"
 subtitle: "Backend & AI Engineering Intern Applicant"
 author_profile: true
+layout: archive
 redirect_from: 
   - /about/
   - /about.html
