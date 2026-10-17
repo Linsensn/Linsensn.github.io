@@ -16,8 +16,6 @@ redirect_from:
 
 > 查看完整简历：[我的简历](/cv/)
 
----
-
 <details class="fold" open>
 <summary>教育背景</summary>
 
@@ -170,5 +168,20 @@ details.fold[open] > summary::before {
 .page__content th {
   font-weight: bold !important;
   background-color: #f7f7f7; /* 给表头加个浅灰底色，更像专业表格 */
+}
+
+/* 调整引用块（简历链接那里）的间距 */
+.page__content blockquote {
+  margin: 1.5em 0 !important; /* 控制引用块上下的总间距 */
+  padding: 0.5em 1em !important; /* 控制内部文字的边距 */
+  font-size: 0.85em !important; /* 和正文字号一致 */
+  border-left: 4px solid #ccc; /* 左侧的粗线（可选，主题默认可能较细） */
+  background-color: #f9f9f9; /* 加个极浅的背景色，视觉更集中 */
+}
+
+/* 消除引用块内部 p 标签底部多余的边距 */
+.page__content blockquote p {
+  margin-bottom: 0 !important; 
+  margin-top: 0 !important;
 }
 </style>
