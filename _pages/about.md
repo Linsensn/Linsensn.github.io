@@ -21,19 +21,19 @@ redirect_from:
 
 <div markdown="1">
 
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; ">
+<h3 style="display: flex; justify-content: space-between; align-items: baseline; ">
   <span>郑州大学（211） · 计算机科学与技术 · 本科</span>
   <span style="font-weight: normal; color: #666;"><code>2023.09 - 2027.07</code></span>
-</h2>
+</h3>
 - GPA 3.67 / 4.0，专业排名 37 / 287（前12.9%）
 - 英语：CET-4 542，CET-6 545
 - 荣誉：校级二等奖学金、校级三好学生(2023‑2024)；蓝桥杯省三等奖、挑战杯校级铜奖
 - 当前大四，无课业压力，可立即到岗，每周5天，可连续实习8个月以上
 
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; ">
+<h3 style="display: flex; justify-content: space-between; align-items: baseline; ">
   <span>大连理工大学（985） · 计算机技术（推免） · 专业型硕士</span>
   <span style="font-weight: normal; color: #666;"><code>2027.09 - 2030.07（预计）</code></span>
-</h2>
+</h3>
 
 </div>
 
@@ -44,7 +44,7 @@ redirect_from:
   
 <div markdown="1">
   
-> 以下为项目概览，完整技术细节、量化指标请跳转项目页面查看：[项目经历](/portfolio/)
+> 以下为项目概览，完整技术细节、量化指标、项目演示请跳转项目页面查看：[项目经历](/portfolio/)
 
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>WebAR轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
@@ -52,7 +52,7 @@ redirect_from:
 </h2>
 
 面向图书馆实景检索业务，在云端无 GPU 的严苛硬件约束下，实现浏览器端无需 APP 的实景导引。<br>
-**技术栈：YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、Redis、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/bookway)
+**技术栈：YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/bookway)
 
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>基于大语言模型的多模态Agent伴学交互系统 ｜ 技术总负责人</span>
@@ -60,7 +60,7 @@ redirect_from:
 </h2>
 
 面向学生自主备考场景，搭建多模态智能伴学 Agent，实现异构学习资料解析与大模型对话答疑闭环。<br>
-**技术栈：FastAPI、PaddleOCR、DeepSeek、Pydantic、SSE、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/LiteKnow)
+**技术栈：FastAPI、Alembic、JWT、OpenCV、PaddleOCR、DeepSeek、GLM、Pydantic、SSE、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/LiteKnow)
 
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>基于大语言模型的高并发推理与微调系统 ｜ 技术总负责人</span>
@@ -68,7 +68,7 @@ redirect_from:
 </h2>
 
 针对复杂情感文本分析场景，基于 Llama3-8B 构建大模型量化微调与多模型交叉验证评测系统。<br>
-**技术栈：PyTorch、Llama‑3、4bit量化、LoRA/DoRA、Adapter热插拔** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/llama3-sentiment-concurrent)
+**技术栈：PyTorch、Llama‑3、4‑bit量化、DoRA、LoRA、QLoRA、Adapter热插拔、大模型并发评测** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/llama3-sentiment-concurrent)
 
 </div>
 </details>
