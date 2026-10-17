@@ -13,14 +13,13 @@ redirect_from:
     <i class="fas fa-mobile-alt" style="width: 16px; text-align: center; margin-right: 4px;"></i> 15903682174（微信同号）
     <span style="margin: 0 8px; color: #ccc;">|</span> 
     <i class="fas fa-envelope" style="width: 16px; text-align: center; margin-right: 4px;"></i> <a href="mailto:2103123944@qq.com">2103123944@qq.com</a>
-  </p>
-  <p style="margin-bottom: 0; font-size: 0.9em; color: #555;">
+    <span style="margin: 0 8px; color: #ccc;">|</span> 
     <i class="fas fa-globe" style="width: 16px; text-align: center; margin-right: 4px;"></i> <a href="https://Linsensn.github.io" target="_blank">个人主页</a>
     <span style="margin: 0 8px; color: #ccc;">|</span> 
     <i class="fab fa-github" style="width: 16px; text-align: center; margin-right: 4px;"></i> <a href="https://github.com/Linsensn" target="_blank">GitHub</a>
   </p>
   <p style="margin-bottom: 0.5em;"><strong>求职意向：后端 / AI 工程日常实习</strong></p>
-  <p style="margin-top: 0.5em; font-size: 0.85em; color: #e74c3c;">
+  <p style="margin-top: 0.5em; color: #e74c3c;">
     到岗时间：可立即到岗，每周 5 天，可连续实习 8 个月以上
   </p>
 </div>
@@ -51,7 +50,7 @@ redirect_from:
 <details class="fold" open>
   <summary>项目经历</summary>
   <div>
-    <p style="font-size: 0.9em; color: #666; margin-bottom: 1.5em;">💡 以下代码全部开源，源码与演示详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a>。</p>
+    <!-- <p style="color: #666; margin-bottom: 1.5em;">以下代码全部开源，源码与演示详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a>。</p> -->
 
     <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
       <span>WebAR 轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
