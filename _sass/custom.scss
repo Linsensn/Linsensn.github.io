@@ -11,26 +11,3 @@
     }
   }
 }
-// 折叠标题
-.collapse-trigger {
-  cursor: pointer;
-}
-// 折叠箭头
-.collapse-trigger::after {
-  content: " ▶";
-  font-size: 0.8em;
-  opacity: 0.7;
-}
-.collapse-trigger.expanded::after {
-  content: " ▼";
-}
-// 折叠容器
-.collapse-block {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.35s ease;
-}
-.collapse-block.open {
-  // 设置一个足够大的值，容纳你的内容，太大不影响性能
-  max-height: 3000px;
-}
