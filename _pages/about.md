@@ -149,9 +149,9 @@ details.fold[open] > summary::before {
   transform: rotate(90deg);
 }
 
-  /* 调整表格整体字号与间距 */
+/* 调整表格整体字号与间距 */
 .page__content table {
-  font-size: 0.85em !important; /* 和正文保持一致，觉得小可以改 0.95em 或 1em */
+  font-size: 0.9em !important; /* 和正文保持一致，觉得小可以改 0.95em 或 1em */
   width: 100% !important;      /* 确保表格占满整行 */
   margin-bottom: 1.5em !important;
 }
@@ -159,7 +159,7 @@ details.fold[open] > summary::before {
 /* 针对表头和单元格 */
 .page__content th,
 .page__content td {
-  font-size: 0.85em !important;
+  font-size: 0.9em !important;
   padding: 10px 14px !important; /* 增加一点内边距，看起来不拥挤 */
   line-height: 1.5 !important;
 }
@@ -174,7 +174,7 @@ details.fold[open] > summary::before {
 .page__content blockquote {
   margin: 1.5em 0 !important; /* 控制引用块上下的总间距 */
   padding: 0.5em 1em !important; /* 控制内部文字的边距 */
-  font-size: 0.85em !important; /* 和正文字号一致 */
+  font-size: 0.9em !important; /* 和正文字号一致 */
   border-left: 4px solid #ccc; /* 左侧的粗线（可选，主题默认可能较细） */
   background-color: #f9f9f9; /* 加个极浅的背景色，视觉更集中 */
 }
