@@ -92,3 +92,19 @@ redirect_from:
 ---
 
 欢迎交流后端与 AI 方向的技术话题，也期待实习与协作的机会。
+
+
+<style>
+/* 强制覆盖主题的字号和行高，!important 确保绝对生效 */
+.page__content p,
+.page__content li,
+.page__content dl {
+  font-size: 0.9em !important;
+  line-height: 1.6 !important;
+}
+
+/* 顺便把两段文字之间的间距稍微调小一点，更紧凑好看 */
+.page__content p {
+  margin-bottom: 1em !important;
+}
+</style>
