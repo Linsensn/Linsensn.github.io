@@ -54,21 +54,21 @@ redirect_from:
   <span>WebAR轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2025.09‑2026.01</code></span>
 </h3>
-面向图书馆实景检索业务，在云端无 GPU 的严苛硬件约束下，实现浏览器端无需 APP 的实景导引。
+面向图书馆实景检索业务，在云端无 GPU 的严苛硬件约束下，实现浏览器端无需 APP 的实景导引。<br>
 **技术栈：YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、Redis、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/bookway)
 
 <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
   <span>基于大语言模型的多模态Agent伴学交互系统 ｜ 技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2026.05‑2026.07</code></span>
 </h3>
-面向学生自主备考场景，搭建多模态智能伴学 Agent，实现异构学习资料解析与大模型对话答疑闭环。
+面向学生自主备考场景，搭建多模态智能伴学 Agent，实现异构学习资料解析与大模型对话答疑闭环。<br>
 **技术栈：FastAPI、PaddleOCR、DeepSeek、Pydantic、SSE、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/LiteKnow)
 
 <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
   <span>基于大语言模型的高并发推理与微调系统 ｜ 技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2026.06‑2026.08</code></span>
 </h3>
-针对复杂情感文本分析场景，基于 Llama3-8B 构建大模型量化微调与多模型交叉验证评测系统。
+针对复杂情感文本分析场景，基于 Llama3-8B 构建大模型量化微调与多模型交叉验证评测系统。<br>
 **技术栈：PyTorch、Llama‑3、4bit量化、LoRA/DoRA、Adapter热插拔** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/llama3-sentiment-concurrent)
 
 </div>
