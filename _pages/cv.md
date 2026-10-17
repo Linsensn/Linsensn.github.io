@@ -59,8 +59,8 @@ redirect_from:
   <summary>项目经历</summary>
   <div> 
     <div markdown="1">
-      > 以下代码全部开源，源码详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a> 或者每个项目最后有直达链接。<br>
-      > 完整技术细节、量化指标、项目演示请跳转项目页面查看：<a href="/portfolio/">项目经历</a>
+> 以下代码全部开源，源码详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a> 或者每个项目最后有直达链接。
+> 完整技术细节、量化指标、项目演示请跳转项目页面查看：<a href="/portfolio/">项目经历</a>
     </div>
 
     <!-- 项目一 -->
