@@ -102,7 +102,7 @@ redirect_from:
 .page__content p,
 .page__content li,
 .page__content dl {
-  font-size: 0.75em !important;
+  font-size: 0.8em !important;
   line-height: 1.5 !important;
 }
 
