@@ -7,6 +7,13 @@ redirect_from:
   - /resume
 ---
 
+<style>
+  /* 隐藏页面顶部的 CV 大标题，但保留浏览器标签页的标题 */
+  h1.page__title {
+    display: none !important;
+  }
+</style>
+
 <div style="text-align: center; margin-bottom: 2em;">
   <h2 style="margin-bottom: 0.2em;">刘欣然</h2>
   <p style="margin-bottom: 0.5em; color: #555;">
@@ -50,8 +57,10 @@ redirect_from:
 <details class="fold" open>
   <summary>项目经历</summary>
   <div> 
-> 以下代码全部开源，源码详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a> / 每个项目最后有直达链接。
-> 完整技术细节、量化指标、项目演示请跳转项目页面查看：[项目经历](/portfolio/)
+    <p style="font-size: 0.9em; color: #666; margin-bottom: 1em;">
+      以下代码全部开源，源码详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a> 或者 每个项目最后有直达链接。<br>
+      完整技术细节、量化指标、项目演示请跳转项目页面查看：<a href="/portfolio/">项目经历</a>
+    </p>
 
     <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
       <span>WebAR 轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
