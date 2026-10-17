@@ -18,7 +18,7 @@ redirect_from:
 
 ---
 
-<details>
+<details open>
 <summary><strong>教育背景</strong></summary>
 
 ### 郑州大学 · 计算机与人工智能学院 **计算机科学与技术 · 本科**
@@ -30,6 +30,7 @@ redirect_from:
 ### 大连理工大学 · 计算机技术（推免）
 专业型硕士｜预计2027.09入学
 </details>
+
 ---
 
 ## 项目经历
