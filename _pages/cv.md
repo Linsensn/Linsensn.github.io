@@ -6,22 +6,20 @@ author_profile: true
 redirect_from:
   - /resume
 ---
----
-layout: single
-title: "简历"
-permalink: /cv/
-author_profile: true
----
 
 <div style="text-align: center; margin-bottom: 2em;">
   <h2 style="margin-bottom: 0.2em;">刘欣然</h2>
-  <p style="margin-bottom: 0.5em;"><strong>求职意向：后端 / AI 工程日常实习</strong></p>
-  <p style="margin-bottom: 0.5em; font-size: 0.9em; color: #555;">
-    📞 15903682174（微信同号） | ✉️ <a href="mailto:2103123944@qq.com">2103123944@qq.com</a>
+  <p style="margin-bottom: 0.5em; color: #555;">
+    <i class="fas fa-mobile-alt" style="width: 16px; text-align: center; margin-right: 4px;"></i> 15903682174（微信同号）
+    <span style="margin: 0 8px; color: #ccc;">|</span> 
+    <i class="fas fa-envelope" style="width: 16px; text-align: center; margin-right: 4px;"></i> <a href="mailto:2103123944@qq.com">2103123944@qq.com</a>
   </p>
   <p style="margin-bottom: 0; font-size: 0.9em; color: #555;">
-    🌐 <a href="https://Linsensn.github.io" target="_blank">个人主页</a> | 💻 <a href="https://github.com/Linsensn" target="_blank">GitHub</a>
+    <i class="fas fa-globe" style="width: 16px; text-align: center; margin-right: 4px;"></i> <a href="https://Linsensn.github.io" target="_blank">个人主页</a>
+    <span style="margin: 0 8px; color: #ccc;">|</span> 
+    <i class="fab fa-github" style="width: 16px; text-align: center; margin-right: 4px;"></i> <a href="https://github.com/Linsensn" target="_blank">GitHub</a>
   </p>
+  <p style="margin-bottom: 0.5em;"><strong>求职意向：后端 / AI 工程日常实习</strong></p>
   <p style="margin-top: 0.5em; font-size: 0.85em; color: #e74c3c;">
     到岗时间：可立即到岗，每周 5 天，可连续实习 8 个月以上
   </p>
