@@ -108,13 +108,13 @@ redirect_from:
 
 /* 2. 重新指定各级标题大小，确保大小层级分明 */
 .page__content h1 {
-  font-size: 1.8em !important;
+  font-size: 1.5em !important;
   margin-bottom: 0.6em !important;
 }
 
 .page__content h2 {
-  font-size: 1.4em !important;
-  border-bottom: 1px solid #e5e5e5;
+  font-size: 1.3em !important;
+  /* border-bottom: 1px solid #e5e5e5;*/
   padding-bottom: 0.3em;
 }
 
@@ -126,7 +126,7 @@ redirect_from:
 
 /* 将折叠标题字号设置为 h1 级别 */
 details.fold > summary {
-  font-size: 1.8em !important;   /* 核心：设置为和 h1 一样大 */
+  font-size: 1.5em !important;   /* 核心：设置为和 h1 一样大 */
   font-weight: bold !important;  /* 确保加粗 */
   color: #3f3f3f !important;
   cursor: pointer;
