@@ -23,7 +23,7 @@ repository               : "Linsensn/Linsensn.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "avatar.png"
+  avatar           : "avatar.jpg"
   name             : "刘欣然"
   pronouns         : # example: "she/her"  
   bio              : "郑大计科，保研大连理工，求职后端/AI日常实习"
