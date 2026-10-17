@@ -95,16 +95,29 @@ redirect_from:
 
 
 <style>
-/* 强制覆盖主题的字号和行高，!important 确保绝对生效 */
+/* 1. 调整正文字号 */
 .page__content p,
 .page__content li,
 .page__content dl {
   font-size: 0.9em !important;
-  line-height: 1.6 !important;
+  line-height: 1.7 !important;
 }
 
-/* 顺便把两段文字之间的间距稍微调小一点，更紧凑好看 */
-.page__content p {
-  margin-bottom: 1em !important;
+/* 2. 重新指定各级标题大小，确保大小层级分明 */
+.page__content h1 {
+  font-size: 1.8em !important;
+  margin-bottom: 0.6em !important;
+}
+
+.page__content h2 {
+  font-size: 1.4em !important;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.3em;
+}
+
+.page__content h3 {
+  font-size: 1.15em !important;
+  /* 如果要加粗，加上下面这行 */
+  font-weight: bold !important; 
 }
 </style>
