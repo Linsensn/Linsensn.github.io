@@ -1,17 +1,26 @@
-<!-- accordion 折叠面板全局脚本 -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+function bindAccordion(){
   const accList = document.getElementsByClassName("accordion");
   for(let i = 0; i < accList.length; i++){
-    accList[i].addEventListener("click", function(){
+    accList[i].onclick = function(){
+      const pTag = this.parentElement;
+      const panel = pTag.nextElementSibling;
+      // 增加判空，防止找不到面板时报错
+      if(!panel) return;
       this.classList.toggle("active");
-      const panel = this.nextElementSibling;
       if(panel.style.maxHeight){
         panel.style.maxHeight = null;
       }else{
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
-    })
+    }
   }
-})
+}
+// 双重保险，等页面DOM加载完成后绑定事件
+if(document.readyState === "loading"){
+  document.addEventListener('DOMContentLoaded', bindAccordion);
+}else{
+  bindAccordion();
+}
+window.addEventListener('load', bindAccordion);
 </script>
