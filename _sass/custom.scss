@@ -1,4 +1,7 @@
-/* 调整正文全局字体大小 */
 .page__content {
+  font-size: 0.9em; 
+}
+/* 如果你选中了 p 标签，可以更精准一点 */
+.page__content p {
   font-size: 0.9em; 
 }
