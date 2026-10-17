@@ -1,0 +1,13 @@
+/* 去掉导航栏所有元素点击/聚焦时的黑框 */
+.greedy-nav {
+  a, button {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent; /* 顺手去掉移动端点击的半透明灰高亮 */
+
+    &:focus, &:active {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
