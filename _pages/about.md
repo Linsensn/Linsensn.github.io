@@ -41,8 +41,6 @@ redirect_from:
 
 </details>
 
----
-
 <details class="fold" open>
 <summary>项目经历</summary>
 
@@ -77,8 +75,6 @@ redirect_from:
 </div>
 </details>
 
----
-
 <details class="fold" open>
 <summary>竞赛与荣誉</summary>
 
@@ -92,8 +88,6 @@ redirect_from:
 </div>
 </details>
 
----
-
 欢迎交流后端与 AI 方向的技术话题，也期待实习与协作的机会。
 
 
@@ -102,7 +96,7 @@ redirect_from:
 .page__content p,
 .page__content li,
 .page__content dl {
-  font-size: 0.8em !important;
+  font-size: 0.85em !important;
   line-height: 1.5 !important;
 }
 
@@ -113,13 +107,13 @@ redirect_from:
 }
 
 .page__content h2 {
-  font-size: 1.0em !important;
+  font-size: 1.05em !important;
   /* border-bottom: 1px solid #e5e5e5;*/
   padding-bottom: 0.3em;
 }
 
 .page__content h3 {
-  font-size: 0.9em !important;
+  font-size: 0.95em !important;
   /* 如果要加粗，加上下面这行 */
   font-weight: bold !important; 
 }
@@ -155,5 +149,26 @@ details.fold > summary::before {
 /* 展开时箭头朝下 */
 details.fold[open] > summary::before {
   transform: rotate(90deg);
+}
+
+  /* 调整表格整体字号与间距 */
+.page__content table {
+  font-size: 0.85em !important; /* 和正文保持一致，觉得小可以改 0.95em 或 1em */
+  width: 100% !important;      /* 确保表格占满整行 */
+  margin-bottom: 1.5em !important;
+}
+
+/* 针对表头和单元格 */
+.page__content th,
+.page__content td {
+  font-size: 0.85em !important;
+  padding: 10px 14px !important; /* 增加一点内边距，看起来不拥挤 */
+  line-height: 1.5 !important;
+}
+
+/* 如果你想让表头（类别、奖项、级别）稍微显眼一点 */
+.page__content th {
+  font-weight: bold !important;
+  background-color: #f7f7f7; /* 给表头加个浅灰底色，更像专业表格 */
 }
 </style>
