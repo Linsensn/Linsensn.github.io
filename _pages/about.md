@@ -23,14 +23,19 @@ redirect_from:
 
 <div markdown="1">
 
-### 郑州大学 · 计算机与人工智能学院 **计算机科学与技术 · 本科**
-`2023.09 – 至今` - GPA 3.67 / 4.0，专业排名 37 / 287（前12.9%）
+<h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+  <span>郑州大学（211） · 计算机科学与技术 · 本科</span>
+  <span style="font-size: 0.65em; font-weight: normal; color: #666;"><code>2023.09 - 2027.07</code></span>
+</h3>
+- GPA 3.67 / 4.0，专业排名 37 / 287（前12.9%）
 - 英语：CET-4 542，CET-6 545
 - 荣誉：校级二等奖学金、校级三好学生
 - 当前大四，无课业压力，可稳定长期实习
 
-### 大连理工大学 · 计算机技术（推免）
-专业型硕士｜预计2027.09入学
+<h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+  <span>大连理工大学（985） · 计算机技术（推免） · 专业型硕士</span>
+  <span style="font-size: 0.65em; font-weight: normal; color: #666;"><code>2027.09 - 2030.07（预计）</code></span>
+</h3>
 
 </div>
 
