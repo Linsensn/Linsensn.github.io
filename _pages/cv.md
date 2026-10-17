@@ -58,10 +58,10 @@ redirect_from:
 <details class="fold" open>
   <summary>项目经历</summary>
   <div> 
-    <p style="font-size: 0.9em; color: #666; margin-bottom: 1em;">
-      以下代码全部开源，源码详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a> 或者每个项目最后有直达链接。<br>
-      完整技术细节、量化指标、项目演示请跳转项目页面查看：<a href="/portfolio/">项目经历</a>
-    </p>
+    <div markdown="1">
+      > 以下代码全部开源，源码详见我的 <a href="https://github.com/Linsensn" target="_blank">GitHub</a> 或者每个项目最后有直达链接。<br>
+      > 完整技术细节、量化指标、项目演示请跳转项目页面查看：<a href="/portfolio/">项目经历</a>
+    </div>
 
     <!-- 项目一 -->
     <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
@@ -90,7 +90,7 @@ redirect_from:
       <li><strong>多模态解析与交互：</strong>开发多模态解析中间件，通过 OpenCV 自适应切片、PyMuPDF/antiword、PaddleOCR 降级兜底兼容图片/PDF/Word 素材；封装异步客户端实现 <strong>DeepSeek/GLM 多模型动态路由</strong>，结合 Pydantic 强校验、<strong>SSE 流式响应</strong>与会话持久化保障交互。</li>
       <li><strong>量化成果：</strong>完成整套 Agent 后端底座，支持多格式学习素材上传解析、流式 AI 问答、自动生成测验题库；实现学生会话树形管理、管理员批量管控，解决多模型调用、异构文档解析的工程痛点，容器化交付完整业务后端。</li>
     </ul>
-    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>FastAPI、Alembic、JWT、OpenCV、PaddleOCR、DeepSeek、GLM、Pydantic、SSE、Docker · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/LiteKnow" target="_blank">源码</a></p>
+    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>FastAPI、Alembic、JWT、OpenCV、PaddleOCR、DeepSeek、GLM、Pydantic、SSE、Docker · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/LiteKnow" target="_blank">GitHub 源码</a></p>
 
     <br>
 
@@ -105,7 +105,7 @@ redirect_from:
       <li><strong>推理优化与工程落地：</strong>底层实现<strong>“单基座常驻 + 多 Adapter 毫秒级热插拔”</strong>规避权重重复加载；设计强校验异常拦截、逆向惩罚状态机抑制模型输出发散，开发交互式多模型并发评测工具。</li>
       <li><strong>量化成果：</strong>模型整体准确率达到 <span class="highlight-text">91.54%</span>，F1 分数 <span class="highlight-text">0.9129</span>；大幅降低多模型切换显存开销，实现可交互的大模型批量评测能力。</li>
     </ul>
-    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>PyTorch、Llama-3、4bit 量化、DoRA、LoRA、QLoRA、Adapter 热插拔、大模型并发评测 · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/llama3-sentiment-concurrent" target="_blank">源码</a></p>
+    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>PyTorch、Llama-3、4bit 量化、DoRA、LoRA、QLoRA、Adapter 热插拔、大模型并发评测 · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/llama3-sentiment-concurrent" target="_blank">GitHub源码</a></p>
   </div>
 </details>
 
@@ -128,37 +128,14 @@ redirect_from:
 
 <details class="fold" open>
   <summary>竞赛与荣誉</summary>
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <th>类别</th>
-          <th>奖项名称</th>
-          <th>级别 / 时间</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>学科竞赛</td>
-          <td>第十六届蓝桥杯 C/C++ 程序设计大学 A 组三等奖（河南赛区）</td>
-          <td>省级 · 2025-05</td>
-        </tr>
-        <tr>
-          <td>创业竞赛</td>
-          <td>"挑战杯"大学生创业计划竞赛铜奖（问生医药智能问答平台）</td>
-          <td>校级 · 2026-04</td>
-        </tr>
-        <tr>
-          <td>荣誉称号</td>
-          <td>校级三好学生、优秀学生奖学金二等奖</td>
-          <td>校级 · 2023-2025</td>
-        </tr>
-        <tr>
-          <td>社会实践</td>
-          <td>寒假社会实践一等奖（数字助老）、思政实践成果展示特等奖</td>
-          <td>校级 · 2024-2025</td>
-        </tr>
-      </tbody>
-    </table>
+  <div markdown="1">
+
+| 类别 | 奖项名称 | 级别 / 时间 |
+| --- | --- | --- |
+| 学科竞赛 | 第十六届蓝桥杯 C/C++ 程序设计大学 A 组三等奖（河南赛区） | 省级 · 2025-05 |
+| 创业竞赛 | "挑战杯"大学生创业计划竞赛铜奖（问生医药智能问答平台） | 校级 · 2026-04 |
+| 荣誉称号 | 校级三好学生、优秀学生奖学金二等奖 | 校级 · 2023-2025 |
+| 社会实践 | 寒假社会实践一等奖（数字助老）、思政实践成果展示特等奖 | 校级 · 2024-2025 |
+
   </div>
 </details>
