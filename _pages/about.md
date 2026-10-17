@@ -29,8 +29,8 @@ redirect_from:
 </h3>
 - GPA 3.67 / 4.0，专业排名 37 / 287（前12.9%）
 - 英语：CET-4 542，CET-6 545
-- 荣誉：校级二等奖学金、校级三好学生
-- 当前大四，无课业压力，可稳定长期实习
+- 荣誉：校级二等奖学金、校级三好学生(2023‑2024)；蓝桥杯省三等奖、挑战杯校级铜奖
+- 当前大四，无课业压力，可立即到岗，每周5天，可连续实习8个月以上
 
 <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
   <span>大连理工大学（985） · 计算机技术（推免） · 专业型硕士</span>
@@ -43,21 +43,36 @@ redirect_from:
 
 ---
 
-## 项目经历
+<details class="fold" open>
+<summary>项目经历</summary>
+
+<div markdown="1">
 
 > 以下为项目概览，完整技术细节、量化指标请跳转项目页面查看：[项目经历](/portfolio/)
 
-### 基于移动端 AR 的轻量化实景追踪系统｜技术总负责人 `2025.09‑2026.01`
-面向低算力端侧场景，主导WebAR实景追踪系统开发。完成模型轻量化、检测后处理优化、OCR文本提取与高并发检索服务落地，在CPU受限环境下保障整套系统稳定运行。
-**技术栈：YOLOv8‑Nano、ONNX、Redis、SQL**
+<h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+  <span>WebAR轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
+  <span style="font-weight: normal; color: #666;"><code>2025.09‑2026.01</code></span>
+</h3>
+面向图书馆实景检索业务，在云端无 GPU 的严苛硬件约束下，实现浏览器端无需 APP 的实景导引。
+**技术栈：YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、Redis、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/你的仓库名1)
 
-### 基于大语言模型的高并发推理与微调系统｜技术总负责人 `2026.06‑2026.08`
-基于Llama‑3‑8B搭建大模型微调、多模型并发评测系统，实现Adapter热插拔，针对显存占用、推理输出发散问题做优化，完成数据集处理与模型效果验证。
-**技术栈：PyTorch、Llama‑3、量化微调、并发服务**
+<h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+  <span>基于大语言模型的多模态Agent伴学交互系统 ｜ 技术总负责人</span>
+  <span style="font-weight: normal; color: #666;"><code>2026.05‑2026.07</code></span>
+</h3>
+面向学生自主备考场景，搭建多模态智能伴学 Agent，实现异构学习资料解析与大模型对话答疑闭环。
+**技术栈：FastAPI、PaddleOCR、DeepSeek、Pydantic、SSE、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/你的仓库名2)
 
-### LiteKnow多模态Agent伴学交互系统｜技术总负责人 `2026.05‑2026.07`
-主导后端整体开发，基于FastAPI搭建微服务架构，实现PDF/图片等异构文档解析、多模型动态路由、SSE流式输出，构建面向学习场景的多模态Agent应用。
-**技术栈：FastAPI、Docker、Alembic、Pydantic、多LLM接口**
+<h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.5em; margin-bottom: 0.5em;">
+  <span>基于大语言模型的高并发推理与微调系统 ｜ 技术总负责人</span>
+  <span style="font-weight: normal; color: #666;"><code>2026.06‑2026.08</code></span>
+</h3>
+针对复杂情感文本分析场景，基于 Llama3-8B 构建大模型量化微调与多模型交叉验证评测系统。
+**技术栈：PyTorch、Llama‑3、4bit量化、LoRA/DoRA、Adapter热插拔** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/你的仓库名3)
+
+</div>
+</details>
 
 ---
 
