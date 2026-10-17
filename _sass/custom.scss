@@ -12,47 +12,39 @@
   }
 }
 
-/* ===== 原生 details 折叠完美版 ===== */
-
-/* 控制整体上下间距 */
+/* ===== 原生 details 终极完美版 ===== */
 details.fold {
   margin-bottom: 2em;
+  border-bottom: 1px solid #e5e5e5; /* 把原本 h2 的下划线移到最外层 */
 }
 
-/* 标题行：使用 Flex 布局让箭头和文字垂直居中 */
+/* 标题行：用纯文本模拟原本的 h2 */
 details.fold > summary {
-  display: flex;
-  align-items: center; /* 核心：垂直居中 */
+  font-size: 1.5em;      /* 和主题原本的 h2 一样大 */
+  font-weight: 700;      /* 加粗 */
+  color: #3f3f3f;        /* 颜色也保持一致 */
   cursor: pointer;
-  list-style: none;    /* 去掉浏览器默认的黑三角 */
-  padding-bottom: 0.5em; 
-  border-bottom: 1px solid #e5e5e5; /* 统一在这一行加底边线 */
+  list-style: none;      /* 去掉浏览器默认黑三角 */
+  display: flex;
+  align-items: center;   /* 垂直居中对齐 */
+  padding: 0.8em 0 0.4em 0; /* 上下留白替代 margin */
 }
 
-/* 隐藏 Safari/Chrome 自带的默认三角 */
+/* 隐藏 Chrome/Safari 的默认三角 */
 details.fold > summary::-webkit-details-marker {
   display: none;
 }
 
-/* 用 CSS 手绘箭头 */
+/* 自己画一个完美的三角箭头 */
 details.fold > summary::before {
   content: "▶";
-  font-size: 0.65em;
-  margin-right: 0.8em; /* 箭头和文字的间距 */
+  font-size: 0.5em;      /* 箭头小一点 */
+  margin-right: 1em;
   color: #666;
   transition: transform 0.2s ease-in-out;
 }
 
-/* 展开时箭头旋转 90 度 */
+/* 展开时箭头旋转 */
 details.fold[open] > summary::before {
   transform: rotate(90deg);
-}
-
-/* 强行抹除主题给 h2 加的巨大边距和自带下划线 */
-details.fold > summary > h2 {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  line-height: 1.2 !important;
-  font-size: 1.5em; /* 如果觉得字号不对可以微调这里 */
 }
