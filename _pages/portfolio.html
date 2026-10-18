@@ -219,24 +219,123 @@ author_profile: true
 <br>
 
 <!-- ===== 项目二 ===== -->
-<details class="fold" open>
-  <summary>基于大语言模型的多模态 Agent 交互系统</summary>
+<details class="fold">
+  <summary>基于大语言模型的多模态 Agent 交互系统｜轻知LiteKnow</summary>
   <div>
-    <h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
-      <span class="highlight-text">算法与技术总负责人</span>
-      <span style="font-weight: normal; color: #666;"><code>2026.05 - 2026.07</code></span>
-    </h2>
-    <p><strong>项目背景：</strong>面向学生自主备考场景，搭建多模态智能伴学 Agent 平台，实现异构学习资料解析、大模型对话答疑、智能出题、错题回溯的完整业务闭环；作为团队技术总监负责后端架构设计、核心模块编码与团队开发规范落地。</p>
-    <p><strong>我的职责：</strong>负责后端架构与鉴权体系设计、多模态解析中间件与模型路由核心模块开发。</p>
+    <h3 style="margin-top:0.5em;">
+      <span class="highlight-text">算法与技术总负责人 · 项目总规模6人</span>
+      <span style="font-weight: normal; color: #666; margin-left:0.8em;"><code>2026.05 - 2026.07</code></span>
+    </h3>
+    <p><strong>项目背景：</strong>面向学生自主备考场景，搭建多模态智能伴学Agent平台，解决学习素材碎片化、答疑同质化、缺少个性化习题生成的痛点；支持异构学习资料解析、大模型对话答疑、智能出题、错题回溯完整业务闭环。我作为团队<strong>技术总监</strong>，负责后端整体架构设计、核心模块编码实现，以及团队开发规范、容器化协作流程落地。</p>
+    <p><strong>我的职责：</strong>主导后端分层架构、JWT‑RBAC鉴权权限体系设计；独立实现多模态文件解析中间件、LLM异步客户端与多模型动态路由；制定Alembic数据库迁移、Git PR评审、Docker开发环境全套团队规约，完成可容器化部署的Agent业务后端。</p>
+
+    <h2>1. 后端架构与权限鉴权体系</h2>
+    <h3>(1) FastAPI分层架构与统一异常响应体系</h3>
     <ul>
-      <li><strong>后端架构：</strong>基于 FastAPI 搭建分层后端，实现全局异常拦截与统一业务响应码；Alembic 落地 Code-First ORM 迁移，制定规约解决多人迁移版本分叉；基于 JWT 完成微信 OAuth 鉴权，搭建 <strong>学生 / 管理员 RBAC 角色权限隔离体系</strong>。</li>
-      <li><strong>多模态解析：</strong>开发解析中间件，通过 OpenCV 自适应切片、PyMuPDF / antiword、PaddleOCR 降级兜底，兼容图片 / PDF / Word 素材。</li>
-      <li><strong>模型交互：</strong>封装异步客户端实现 <strong>DeepSeek / GLM 多模型动态路由</strong>，结合 Pydantic 强校验、SSE 流式响应与会话持久化保障交互。</li>
-      <li><strong>量化成果：</strong>完成整套 Agent 后端底座，支持多格式素材上传解析、流式 AI 问答、自动生成测验题库；学生会话树形管理、管理员批量管控，容器化交付完整业务后端。</li>
+      <li>搭建<strong>路由层‑业务Service层‑CRUD数据访问层‑ORM模型层‑Pydantic Schema契约层</strong>完整分层后端架构，模块职责解耦，便于团队多人并行开发。</li>
+      <li>我设计实现全局异常拦截机制，区分HTTP协议异常与自定义业务异常；定义5位业务错误码枚举，封装统一JSON响应格式<code>code / success / message / data</code>，生产环境屏蔽底层堆栈敏感信息。</li>
+      <li>基于FastAPI <code>Lifespan</code>生命周期钩子，实现服务启动自动执行数据库种子数据初始化，空库自动插入测试业务数据，降低团队本地调试门槛。</li>
     </ul>
-    <p><strong>技术栈：</strong>FastAPI、Alembic、JWT、OpenCV、PaddleOCR、DeepSeek、GLM、Pydantic、SSE、Docker
-      · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/LiteKnow" target="_blank">GitHub 源码</a></p>
-    <p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>LLM 应用工程化（多模型路由、流式输出）+ 鉴权 / 权限体系 + 异构文档解析，贴近 Agent / AI 应用后端。</p>
+    <div class="project-gallery">
+      <a href="/assets/images/liteknow/arch.png" data-lg-caption="LiteKnow六层系统总体架构，包含前端小程序、接口层、Agent应用层、基础服务层、资源层、运行环境层">
+        <div class="img-wrap">
+          <img src="/assets/images/liteknow/arch.png" alt="LiteKnow系统六层总体架构图">
+          <p class="img-caption">LiteKnow六层系统总体架构图</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) 微信OAuth登录与RBAC角色权限隔离</h3>
+    <ul>
+      <li>对接微信开放平台OAuth授权登录，通过JWT生成访问令牌；封装依赖注入校验器<code>get_current_user</code>、<code>get_admin_user</code>做接口鉴权拦截。</li>
+      <li>实现<strong>学生 / 管理员双RBAC权限隔离</strong>：学生仅可操作本人会话、错题、附件资源；管理员后台具备全量用户、会话、题库批量管控、CSV流式导出统计报表能力。</li>
+      <li>全部管理员批量操作接入审计日志，记录账号变更、会话管控行为，留存操作轨迹；接口做越权拦截，杜绝用户越权访问他人学习数据。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/liteknow/usecase.png" data-lg-caption="系统用例图，区分学生用户、管理员、微信开放平台三方角色操作边界">
+        <div class="img-wrap">
+          <img src="/assets/images/liteknow/usecase.png" alt="LiteKnow系统用例图">
+          <p class="img-caption">系统角色用例图，区分学生、管理员操作边界</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(3) Code‑First数据库迁移与团队协同规约</h3>
+    <ul>
+      <li>基于SQLAlchemy ORM抽象基类<code>BaseModel</code>统一封装主键、创建、更新时间公共字段。</li>
+      <li>我牵头制定<strong>Alembic Code‑First开发规范</strong>，禁止手写DDL；解决多人并行开发迁移脚本版本分叉问题，明确merge‑heads合并流程。</li>
+      <li>约束团队拉取代码后必须执行<code>alembic upgrade head</code>同步本地库，规避模型与数据库表结构不一致导致的运行报错。</li>
+    </ul>
+
+    <h2>2. 多模态文件解析中间件实现</h2>
+    <ul>
+      <li>开发统一文件解析入口，支持JPG/PNG/PDF/DOCX/DOC等学习素材；对大尺寸图片做OpenCV自适应切片分块，降低PaddleOCR推理内存开销。</li>
+      <li>PDF采用混合策略：优先PyMuPDF提取文本；页面文本过少则降级转为图片调用OCR识别扫描教材页。</li>
+      <li>旧版.doc文件采用antiword解析，解析失败自动切换BeautifulSoup做HTML内容兜底，提升老旧文档提取成功率。</li>
+    </ul>
+
+    <h2>3. LLM‑Agent大模型交互模块</h2>
+    <h3>(1) 封装统一异步LLM客户端，多模型动态路由</h3>
+    <ul>
+      <li>封装单例<code>llm_client</code>，同时支持<strong>流式生成</strong>、阻塞非流式两种调用模式；兼容DeepSeek、GLM多模型动态切换。</li>
+      <li>提供LangChain ChatOpenAI实例获取接口，供Agent工具链调用；增加异常捕获日志，大模型服务出错返回友好业务提示。</li>
+    </ul>
+
+    <h3>(2) SSE流式问答与结构化测验生成</h3>
+    <ul>
+      <li>课文摘要接口使用<strong>SSE Server‑Sent‑Events</strong>长流，实现前端打字机流式输出效果，会话消息持久入库。</li>
+      <li>智能测验接口借助PydanticOutputParser强制大模型输出JSON结构化题目，完成题目、选项、答案、解析自动落库题库；支持追加至已有题库。</li>
+      <li>完整业务链路包含参数校验、事务保护、会话关联，大模型输出异常做业务层兜底。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/liteknow/ai_seq.png" data-lg-caption="AI学习功能业务时序图，小程序请求‑鉴权‑Agent调用‑模型推理‑结果持久化完整链路">
+        <div class="img-wrap">
+          <img src="/assets/images/liteknow/ai_seq.png" alt="AI学习功能业务流转时序图">
+          <p class="img-caption="AI学习功能业务流转时序图">
+        </div>
+      </a>
+    </div>
+
+    <h2>4. 容器化部署与团队研发流程管理</h2>
+    <h3>(1) Docker Compose一键本地开发环境</h3>
+    <ul>
+      <li>编写<code>docker‑compose.dev.yml</code>编排后端、MySQL、Redis服务；使用volume目录挂载实现代码热重载。</li>
+      <li>团队成员仅需执行<code>docker‑compose up -d</code>即可拉起完整开发环境，消除“在我机器能跑”环境差异问题。</li>
+    </ul>
+
+    <h3>(2) 团队规范、PR评审与测试闭环</h3>
+    <ul>
+      <li>输出《数据库开发指南》《基础开发流程规范》文档，统一目录结构、注释、函数docstring要求。</li>
+      <li>推行Issue‑PR开发模式，PR必须经过代码评审；借助Swagger交互式API文档、Apifox完成接口契约测试。</li>
+      <li>开展Scrum每日站会，指导成员排查容器、数据库、鉴权相关问题，保障团队并行迭代效率。</li>
+    </ul>
+
+    <!-- 核心量化成果 -->
+    <div class="info-card">
+      <h2>核心量化成果</h2>
+      <ul>
+        <li>实现完整多模态解析链路，兼容图片/PDF/Word等备考素材，可处理扫描版教材文件；</li>
+        <li>支持SSE流式问答 + 结构化AI出题，完成会话树形存储、错题、收藏、题库全套业务；</li>
+        <li>完成RBAC权限、全局异常、统一响应、数据库迁移整套企业级后端底座，Docker一键复现开发环境；</li>
+        <li>制定团队开发规约，解决多人Alembic迁移冲突，支撑6人团队并行开发。</li>
+      </ul>
+    </div>
+
+    <p><strong>交付产物：</strong>完整FastAPI后端源码、数据库ORM模型、Alembic迁移脚本、多模态解析中间件、LLM异步客户端、Docker开发编排配置、Swagger接口文档、团队开发规范文档。</p>
+    <p><strong>技术栈：</strong>FastAPI、SQLAlchemy、Alembic、JWT、Pydantic、OpenCV、PaddleOCR、PyMuPDF、DeepSeek、GLM、LangChain、SSE、Docker、MySQL、Redis</p>
+
+    <!-- 代码仓库 & 项目说明 -->
+    <div class="info-card">
+      <h2>代码仓库 & 项目说明</h2>
+      <ul>
+        <li>
+          <strong>GitHub仓库：</strong>
+          <a href="https://github.com/Linsensn/LiteKnow" target="_blank">github.com/Linsensn/LiteKnow</a>
+        </li>
+      </ul>
+    </div>
+
+    <p class="block-quote-note"><strong>对岗位的匹配点：</strong>具备LLM大模型应用工程落地经验，掌握SSE流式输出、多模型封装；熟悉FastAPI分层后端、JWT‑RBAC权限体系、ORM数据库迁移、容器化开发；拥有团队技术负责人、制定研发规范、代码评审实践，匹配AI Agent后端、大模型应用后端岗位。</p>
   </div>
 </details>
 
