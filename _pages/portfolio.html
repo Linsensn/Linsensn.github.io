@@ -94,16 +94,13 @@ author_profile: true
     </div>
 
     <h3>(4) 三级检索状态机，处理OCR识别噪声</h3>
-    <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
-
+    <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。
+    在Levenshtein编辑距离中针对OCR常见形近字（0/O、1/l等）做替换代价降权；大模型纠错识别出新书名后，写入<code>PendingBook</code>待确认隔离库；当同一书籍累计扫描达到5次触发自动晋升，迁移至正式图书库。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
+    
     <h2>2. 后端系统架构与业务实现</h2>
-    <ul>
-      <li>搭建FastAPI分层架构：路由层‑业务层‑CRUD‑ORM模型‑Schema契约层；采用Code‑First模式，SQLAlchemy+Alembic管理数据库迁移，禁止手写DDL。</li>
-      <li>Redis实现轨迹缓存屏障，基于track_id做会话缓存，配置TTL过期、LRU内存淘汰，减少重复推理计算；实现SSE流式推送识别结果给前端WebAR。</li>
-      <li>设计完整业务异常体系：区分HTTP标准异常与1xxxx/3xxxx业务状态码，全局异常拦截；实现并发信号量限流，控制图像推理并发数，保护2C4G服务器。</li>
-    </ul>
-
-    <!-- ========== 画廊B：【后端模块专属】 ========== -->
+    
+    <h3>(1) FastAPI分层架构与Code‑First数据库设计</h3>
+    <p>搭建路由层‑业务层‑CRUD‑ORM模型‑Schema契约层完整分层架构；采用Code‑First开发模式，基于SQLAlchemy定义数据模型，配合Alembic完成数据库版本迁移，禁止手写DDL建表语句；封装全局依赖注入，自动管理数据库会话生命周期，请求结束自动归还连接池，避免连接泄露。</p>
     <div class="project-gallery">
       <a href="/assets/images/bookway/arch.png" data-lg-caption="系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块">
         <div class="img-wrap">
@@ -111,6 +108,14 @@ author_profile: true
           <p class="img-caption">系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块</p>
         </div>
       </a>
+    </div>
+    
+    <h3>(2) Redis轨迹缓存与SSE流式推送</h3>
+    <p>基于<code>track_id</code>实现WebAR连续帧轨迹会话缓存，设置TTL=300s缓存过期，Redis配置maxmemory=512MB与allkeys‑lru内存淘汰策略；实现缓存动态击穿逻辑：仅当新帧OCR置信度、文本质量显著提升才重新执行全链路推理，避免重复算力消耗；采用SSE Server‑Sent‑Events长流式协议，将YOLO检测、OCR识别结果逐块实时推送给前端WebAR，降低交互延迟。</p>
+    
+    <h3>(3) 全局异常体系、业务错误码与并发限流防护</h3>
+    <p>搭建完整的异常拦截防护体系，区分HTTP协议异常与自定义业务错误码，视觉类异常使用<code>1xxxx</code>区间，资源限流类异常使用<code>3xxxx</code>区间；全局拦截器捕获各类异常，脱敏后返回标准化JSON响应，不向外暴露底层堆栈信息；实现并发信号量限流，对图像推理任务做并发管控，在腾讯云2C4G无GPU轻量服务器硬件约束下，防止CPU、内存被打满触发OOM。</p>
+    <div class="project-gallery">
       <a href="/assets/images/bookway/search_seq.png" data-lg-caption="三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程">
         <div class="img-wrap">
           <img src="/assets/images/bookway/search_seq.png" alt="三级检索引擎时序图">
@@ -120,13 +125,28 @@ author_profile: true
     </div>
 
     <h2>3. 工程化落地与团队研发管理</h2>
-    <ul>
-      <li>Docker Compose容器编排；应用Lifespan事件实现模型预加载，搭配健康探针、容器重启自愈策略，规避冷启动OOM内存溢出；配置Swap交换分区应对内存峰值。</li>
-      <li>推行Issue驱动开发：定义分支命名规范、commit规范、PR评审‑QC真机验收门禁；统一VSCode代码片段模板，强制文件头与函数docstring注释，适配软件著作权申请。</li>
-      <li>制定完整开发、联调、质控验收流程：SSH隧道连接共享云端数据库，容器化本地测试，Apifox接口契约测试，日志审计。</li>
-    </ul>
 
-    <!-- 核心量化成果：复用info-card -->
+    <h3>(1) Docker容器化部署与高可用自愈体系</h3>
+    <p>采用Docker Compose完成整套业务编排，使用Multi‑stage多阶段构建精简镜像体积；Uvicorn ASGI服务限定单进程运行，避免AI模型多进程内存冗余。依托FastAPI <code>Lifespan</code>生命周期事件，容器启动阶段预加载YOLO、OCR模型至内存，消除请求到来时模型加载带来的冷启动OOM风险；配置容器健康探针 <code>HEALTHCHECK</code> 配合 <code>restart: always</code> 策略实现故障自动重启自愈；服务器配置Swap交换分区应对瞬时内存峰值。
+    集成Dozzle轻量监控组件，极低开销观测全容器CPU、内存指标；基于loguru实现结构化分级日志，通过<code>X‑Device‑ID</code>作为TraceID完成全链路请求追踪，日志按大小、生命周期自动轮转，挂载宿主机卷持久化保存运行现场。</p>
+    <div class="project-gallery">
+      <a href="/assets/images/bookway/deploy_arch.png" data-lg-caption="生产环境Docker容器部署拓扑架构，Nginx、FastAPI、Redis、MySQL组件网络关系">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/deploy_arch.png" alt="服务器Docker部署架构拓扑">
+          <p class="img-caption">生产环境Docker容器部署拓扑架构，Nginx、FastAPI、Redis、MySQL组件网络关系</p>
+        </div>
+      </a>
+    </div>
+    
+    <h3>(2) Issue‑PR驱动团队研发流程与代码规约</h3>
+    <p>项目全程推行Issue驱动开发模式，统一制定分支命名、Git commit提交规范；所有特性开发完成后提交Pull Request，必须经过代码评审 + QC质控真机验收门禁才可合入主干分支。
+    统一VSCode代码片段模板，强制文件头部注释、函数docstring文档字符串，标准化编码格式，满足软件著作权申请材料规范。数据库变更严格遵守Code‑First协同规约，只修改SQLAlchemy模型，由Alembic自动生成迁移脚本，禁止直接手写DDL操作数据库。</p>
+    
+    <h3>(3) 本地联调、接口测试与QC验收闭环流程</h3>
+    <p>本地开发不部署独立MySQL实例，通过SSH隧道端口转发访问共享云端测试数据库；本地全部使用Docker Compose开发容器，保证开发环境与生产环境基线完全对齐。
+    质量验收分为两层：黑盒层面使用Apifox执行接口契约测试，校验业务错误码、边界输入；白盒层面做服务端容器日志审计，排查被框架静默吞噬的异常。只有接口用例全部通过、无异常堆栈输出，PR才允许合并进入主干。</p>
+
+    <!-- 核心量化成果 -->
     <div class="info-card">
       <h2>核心量化成果</h2>
       <ul>
@@ -136,7 +156,7 @@ author_profile: true
       </ul>
     </div>
 
-    <p><strong>交付产物：</strong>完整前后端源码、YOLO/OCR数据集、详细设计说明书、接口规范文档、质控验收流程文档、VSCode代码片段模板、Apifox接口用例集。</p>
+    <p><strong>交付产物：</strong>完整前后端源码、YOLO/OCR数据集和权重、概要设计说明书、详细设计说明书、接口规范文档、测试报告、VSCode代码片段模板、Apifox接口用例集。</p>
 
     <p><strong>技术栈：</strong>YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、MySQL、Docker、Nginx、JWT</p>
 
