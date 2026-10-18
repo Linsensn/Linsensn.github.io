@@ -4,11 +4,71 @@ title: "Portfolio"
 permalink: /portfolio/
 author_profile: true
 ---
+<style>
+  /* 隐藏页面顶部的大标题，保留浏览器标签页标题 */
+  h1.page__title {
+    display: none !important;
+  }
+  /* 关键成果高亮 */
+  .highlight-text {
+    background: linear-gradient(transparent 60%, #fff3bf 60%);
+    font-weight: 600;
+  }
+</style>
 
-{% include base_path %}
+<!-- ============ 项目详情（仅此部分，其余一概不写） ============ -->
 
+<!-- ===== 项目一 ===== -->
+<h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
+  <span>① WebAR 轻量化实景追踪系统 ｜ <span class="highlight-text">算法与技术总负责人</span></span>
+  <span style="font-weight: normal; color: #666;"><code>2025.09 - 2026.01</code></span>
+</h2>
+<p><strong>项目背景：</strong>面向高校图书馆密集书架排布的实景图书检索业务，在云端 <strong>2C4G 无 GPU</strong> 的极小算力约束与大透视畸变场景下，作为 <strong>7 人团队技术负责人</strong>，交付整套 WebAR 智能导引系统，实现浏览器端无需 APP 即可完成书脊检测、文本识别、检索导航。</p>
+<p><strong>我的职责：</strong>负责整体算法方案设计与后端工程架构，统筹团队协作与代码质量门禁。</p>
+<ul>
+  <li><strong>算法与轻量化：</strong>采集标注自建书脊 YOLO、OCR 数据集，完成 YOLOv8-Nano 训练；使用 ONNX 常量折叠、ConvBN 算子融合做模型收缩，实现 <span class="highlight-text">纯 CPU 毫秒级推理</span>（mAP50 = <span class="highlight-text">0.978</span>）。</li>
+  <li><strong>检索与识别：</strong>设计 IoM 嵌套过滤解决密集场景误检，透视坐标逆映射 + 多尺度预处理完成文本 ROI 提取；构建“精确匹配 → 编辑距离纠偏 → LLM 语义纠错”<strong>三级检索状态机</strong>。</li>
+  <li><strong>后端与工程化：</strong>搭建 FastAPI 分层后端，SQLAlchemy + Alembic 落实 Code-First 数据库；Redis 轨迹缓存屏障（LRU/TTL）；SSE 流式响应、Pydantic 契约校验、异常拦截；Docker 容器化部署，健康探针 + 模型预加载规避 OOM。</li>
+  <li><strong>团队管理：</strong>制定 Issue 驱动开发、Git 分支、PR 评审质控门禁，统一团队数据库迁移、接口定义、代码注释全套规范。</li>
+  <li><strong>量化成果：</strong>依靠缓存、异步限流策略保障高并发图像请求下系统 <span class="highlight-text">零宕机</span>；完成端到端业务闭环，容器化可直接部署上线，配套完整工程开发文档。</li>
+</ul>
+<p><strong>技术栈：</strong>YOLOv8-Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT
+  · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/bookway" target="_blank">GitHub 源码</a> · <a href="https://gitee.com/bookway-studio/bookway" target="_blank">Gitee 源码</a></p>
+<p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>端侧 / 云端低算力模型优化能力 + 高并发后端稳定性 + 完整工程化交付，贴近推理服务与业务后端场景。</p>
 
-{% for post in site.portfolio %}
-  {% include archive-single.html %}
-{% endfor %}
+<br>
 
+<!-- ===== 项目二 ===== -->
+<h2 style="display: flex; justify-content: space-between; align-items: baseline;">
+  <span>② 基于大语言模型的多模态 Agent 交互系统 ｜ <span class="highlight-text">算法与技术总负责人</span></span>
+  <span style="font-weight: normal; color: #666;"><code>2026.05 - 2026.07</code></span>
+</h2>
+<p><strong>项目背景：</strong>面向学生自主备考场景，搭建多模态智能伴学 Agent 平台，实现异构学习资料解析、大模型对话答疑、智能出题、错题回溯的完整业务闭环；作为团队技术总监负责后端架构设计、核心模块编码与团队开发规范落地。</p>
+<p><strong>我的职责：</strong>负责后端架构与鉴权体系设计、多模态解析中间件与模型路由核心模块开发。</p>
+<ul>
+  <li><strong>后端架构：</strong>基于 FastAPI 搭建分层后端，实现全局异常拦截与统一业务响应码；Alembic 落地 Code-First ORM 迁移，制定规约解决多人迁移版本分叉；基于 JWT 完成微信 OAuth 鉴权，搭建 <strong>学生 / 管理员 RBAC 角色权限隔离体系</strong>。</li>
+  <li><strong>多模态解析：</strong>开发解析中间件，通过 OpenCV 自适应切片、PyMuPDF / antiword、PaddleOCR 降级兜底，兼容图片 / PDF / Word 素材。</li>
+  <li><strong>模型交互：</strong>封装异步客户端实现 <strong>DeepSeek / GLM 多模型动态路由</strong>，结合 Pydantic 强校验、SSE 流式响应与会话持久化保障交互。</li>
+  <li><strong>量化成果：</strong>完成整套 Agent 后端底座，支持多格式素材上传解析、流式 AI 问答、自动生成测验题库；学生会话树形管理、管理员批量管控，容器化交付完整业务后端。</li>
+</ul>
+<p><strong>技术栈：</strong>FastAPI、Alembic、JWT、OpenCV、PaddleOCR、DeepSeek、GLM、Pydantic、SSE、Docker
+  · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/LiteKnow" target="_blank">GitHub 源码</a></p>
+<p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>LLM 应用工程化（多模型路由、流式输出）+ 鉴权 / 权限体系 + 异构文档解析，贴近 Agent / AI 应用后端。</p>
+
+<br>
+
+<!-- ===== 项目三 ===== -->
+<h2 style="display: flex; justify-content: space-between; align-items: baseline;">
+  <span>③ 基于大语言模型的高并发推理与微调系统 ｜ <span class="highlight-text">算法与技术总负责人</span></span>
+  <span style="font-weight: normal; color: #666;"><code>2026.06 - 2026.08</code></span>
+</h2>
+<p><strong>项目背景：</strong>针对电商评论分析场景，解决大模型处理欲扬先抑、欲抑先扬等复杂情感文本时易被关键词误导产生极性识别反转，以及多模型交叉验证时显存溢出、I/O 阻塞问题；基于 Llama3-8B 与 4.5 万条全量数据集构建高并发评测系统。</p>
+<p><strong>我的职责：</strong>负责微调 / 量化方案、推理优化与并发评测工具的设计与实现。</p>
+<ul>
+  <li><strong>模型微调与评测：</strong>搭建自动化实验流水线，完成多量级数据集消融实验与多架构横向对比；通过混淆矩阵分析 4bit 量化、DoRA 机制带来的模型行为变化。</li>
+  <li><strong>推理优化：</strong>底层实现 <span class="highlight-text">“单基座常驻 + 多 Adapter 毫秒级热插拔”</span>，规避多模型切换时权重重复加载；设计强校验异常拦截、逆向惩罚状态机抑制模型输出发散。</li>
+  <li><strong>量化成果：</strong>全量模型准确率 <span class="highlight-text">91.54%</span>、F1 = <span class="highlight-text">0.9129</span>；大幅降低多模型切换显存开销，交付可交互的大模型批量评测能力。</li>
+</ul>
+<p><strong>技术栈：</strong>PyTorch、Llama-3-8B、4bit 量化、DoRA、LoRA、QLoRA、Adapter 热插拔、大模型并发评测
+  · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/llama3-sentiment-concurrent" target="_blank">GitHub 源码</a></p>
+<p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>LLM 微调 / 量化 / 推理优化 + 并发工程能力，贴近大模型推理与训练优化方向。</p>
