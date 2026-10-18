@@ -18,24 +18,105 @@ author_profile: true
 
 <!-- ===== 项目一 ===== -->
 <details class="fold" open>
-  <summary>WebAR 轻量化实景追踪系统</summary>
+  <summary>WebAR 轻量化实景追踪系统｜书途 BookWay</summary>
+  <div>
     <h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
-      <span class="highlight-text">算法与技术总负责人</span>
+      <span class="highlight-text">算法与技术总负责人 · 项目总规模10人（开发+质控共6人）</span>
       <span style="font-weight: normal; color: #666;"><code>2025.09 - 2026.01</code></span>
     </h2>
-    <p><strong>项目背景：</strong>面向高校图书馆密集书架排布的实景图书检索业务，在云端 <strong>2C4G 无 GPU</strong> 的极小算力约束与大透视畸变场景下，作为 <strong>7 人团队技术负责人</strong>，交付整套 WebAR 智能导引系统，实现浏览器端无需 APP 即可完成书脊检测、文本识别、检索导航。</p>
-    <p><strong>我的职责：</strong>负责整体算法方案设计与后端工程架构，统筹团队协作与代码质量门禁。</p>
+
+    <div style="margin:1em 0;">
+      <h3><i class="fas fa-video"></i> 项目演示视频</h3>
+      <video controls muted style="width:100%; max-width:860px; border-radius:6px;">
+        <source src="/assets/videos/bookway_demo.mp4" type="video/mp4">
+        你的浏览器不支持视频播放，请访问仓库查看演示。
+      </video>
+      <p style="color:#666;">演示：移动端浏览器扫码直接使用WebAR，完成书脊识别、检索、实景导航，无需安装App</p>
+    </div>
+
+    <p><strong>项目背景：</strong>解决高校图书馆“知道书名，找不到实体书籍”痛点；系统部署于<strong>腾讯云2C4G无GPU</strong>轻量服务器，硬件资源极度受限。作为项目算法与技术总负责人，在10人整体项目（开发部4人，开发+质控合计6人）中，主导完成整套WebAR智能图书导引系统，Android浏览器直接访问即可实现书脊目标检测、OCR文本识别、三级检索、AR实景导航全链路闭环。</p>
+
+    <p><strong>我的职责：</strong>负责计算机视觉算法方案设计、FastAPI后端整体架构设计；制定数据库、接口、代码注释规范；主导Issue‑PR驱动开发流程，负责代码评审与版本合并，完成容器化生产环境交付。</p>
+
+    <h3><i class="fas fa-brain"></i> 1. 计算机视觉算法实现</h3>
     <ul>
-      <li><strong>算法与轻量化：</strong>采集标注自建书脊 YOLO、OCR 数据集，完成 YOLOv8-Nano 训练；使用 ONNX 常量折叠、ConvBN 算子融合做模型收缩，实现 <span class="highlight-text">纯 CPU 毫秒级推理</span>（mAP50 = <span class="highlight-text">0.978</span>）。</li>
-      <li><strong>检索与识别：</strong>设计 IoM 嵌套过滤解决密集场景误检，透视坐标逆映射 + 多尺度预处理完成文本 ROI 提取；构建“精确匹配 → 编辑距离纠偏 → LLM 语义纠错”<strong>三级检索状态机</strong>。</li>
-      <li><strong>后端与工程化：</strong>搭建 FastAPI 分层后端，SQLAlchemy + Alembic 落实 Code-First 数据库；Redis 轨迹缓存屏障（LRU/TTL）；SSE 流式响应、Pydantic 契约校验、异常拦截；Docker 容器化部署，健康探针 + 模型预加载规避 OOM。</li>
-      <li><strong>团队管理：</strong>制定 Issue 驱动开发、Git 分支、PR 评审质控门禁，统一团队数据库迁移、接口定义、代码注释全套规范。</li>
-      <li><strong>量化成果：</strong>依靠缓存、异步限流策略保障高并发图像请求下系统 <span class="highlight-text">零宕机</span>；完成端到端业务闭环，容器化可直接部署上线，配套完整工程开发文档。</li>
+      <li>自建图书馆实景数据集，完成书脊目标检测、OCR识别数据采集、标注与清洗；针对密集书架、大透视畸变、逆光阴影做场景覆盖；严格执行标注质量管控策略。</li>
+      <li>基于YOLOv8‑Nano完成迁移训练；通过ONNX做常量折叠、Conv‑BN算子融合模型轻量化；设计IoM嵌套过滤、透视坐标逆映射、多尺度预处理解决密集场景误检。</li>
+      <li>构建<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>三级检索状态机，处理OCR识别错字、形近字干扰。</li>
     </ul>
-    <p><strong>技术栈：</strong>YOLOv8-Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT
-  · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/bookway" target="_blank">GitHub 源码</a> · <a href="https://gitee.com/bookway-studio/bookway" target="_blank">Gitee 源码</a></p>
-    <p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>端侧 / 云端低算力模型优化能力 + 高并发后端稳定性 + 完整工程化交付，贴近推理服务与业务后端场景。</p>
+    <!-- 算法模块配套图片：训练收敛曲线 -->
+    <div style="margin:0.8em 0;">
+      <img src="/assets/images/bookway/yolo_curve.png" alt="YOLOv8‑Nano训练损失与精度收敛曲线" style="width:100%;max-width:720px;">
+      <p style="font-size:0.9em; color:#666;">YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力</p>
+    </div>
+    <div style="margin:0.8em 0;">
+      <img src="/assets/images/bookway/dataset_sample.png" alt="数据集标注样例" style="width:100%;max-width:720px;">
+      <p style="font-size:0.9em; color:#666;">图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景</p>
+    </div>
+
+    <h3><i class="fas fa-cogs"></i> 2. 后端系统架构与业务实现</h3>
+    <ul>
+      <li>搭建FastAPI分层架构：路由层‑业务层‑CRUD‑ORM模型‑Schema契约层；采用Code‑First模式，SQLAlchemy+Alembic管理数据库迁移，禁止手写DDL。</li>
+      <li>Redis实现轨迹缓存屏障，基于track_id做会话缓存，配置TTL过期、LRU内存淘汰，减少重复推理计算；实现SSE流式推送识别结果给前端WebAR。</li>
+      <li>设计完整业务异常体系：区分HTTP标准异常与1xxxx/3xxxx业务状态码，全局异常拦截；实现并发信号量限流，控制图像推理并发数，保护2C4G服务器。</li>
+    </ul>
+    <!-- 架构+时序图 -->
+    <div style="margin:0.8em 0;">
+      <img src="/assets/images/bookway/arch.png" alt="系统整体逻辑架构图" style="width:100%;max-width:720px;">
+      <p style="font-size:0.9em; color:#666;">系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块</p>
+    </div>
+    <div style="margin:0.8em 0;">
+      <img src="/assets/images/bookway/search_seq.png" alt="三级检索引擎时序图" style="width:100%;max-width:720px;">
+      <p style="font-size:0.9em; color:#666;">三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程</p>
+    </div>
+
+    <h3><i class="fas fa-tools"></i> 3. 工程化落地与团队研发管理</h3>
+    <ul>
+      <li>Docker Compose容器编排；应用Lifespan事件实现模型预加载，搭配健康探针、容器重启自愈策略，规避冷启动OOM内存溢出；配置Swap交换分区应对内存峰值。</li>
+      <li>推行Issue驱动开发：定义分支命名规范、commit规范、PR评审‑QC真机验收门禁；统一VSCode代码片段模板，强制文件头与函数docstring注释，适配软件著作权申请。</li>
+      <li>制定完整开发、联调、质控验收流程：SSH隧道连接共享云端数据库，容器化本地测试，Apifox接口契约测试，日志审计。</li>
+    </ul>
+
+    <!-- 核心量化成果块 -->
+    <div style="background:#f7f9fa; padding:1em; border-radius:6px;margin:1em 0;">
+      <h3><i class="fas fa-bar-chart"></i> 核心量化成果</h3>
+      <ul>
+        <li>YOLOv8‑Nano模型 mAP50 = <span class="highlight-text">0.978</span>，纯CPU环境实现毫秒级推理；</li>
+        <li>Redis缓存+异步限流策略，高并发图像请求下系统<span class="highlight-text">零宕机</span>，适配2C4G资源上限；</li>
+        <li>完整端‑to‑end业务闭环，容器镜像可直接部署生产；输出全套详细设计说明书、API文档、测试报告。</li>
+      </ul>
+    </div>
+
+    <p><strong>交付产物：</strong>完整前后端源码、YOLO/OCR数据集、详细设计说明书、接口规范文档、质控验收流程文档、VSCode代码片段模板、Apifox接口用例集。</p>
+
+    <p><strong>技术栈：</strong>YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、MySQL、Docker、Nginx、JWT</p>
+
+    <!-- 代码仓库 & 线上历史部署说明 -->
+    <div style="background:#f7f9fa;padding:1em;border-radius:6px;margin:1em 0;">
+      <h3><i class="fas fa-folder-open"></i> 代码仓库 & 线上历史部署说明</h3>
+      <ul>
+        <li>
+          <strong>Gitee（真实项目研发主仓库）：</strong>
+          <a href="https://gitee.com/bookway‑studio/bookway" target="_blank">gitee.com/bookway‑studio/bookway</a>
+          <br>
+          <span style="font-size:0.9em;color:#444;">真实研发全部在此完成：包含Gitee Issue任务看板、任务拆解与进度管理、分支管理、Pull Request评审、QC质控真机验收全流程记录，所有开发规范文档、开发流程文档均托管于此。</span>
+        </li>
+        <li>
+          <strong>GitHub（仅代码镜像搬运）：</strong>
+          <a href="https://github.com/Linsensn/bookway" target="_blank">github.com/Linsensn/bookway</a>
+          <br>
+          <span style="font-size:0.9em;color:#444;">仅为从Gitee同步搬运的代码镜像，<strong>不存在Issue看板、PR评审与团队协作流程记录，只有源代码文件</strong>。</span>
+        </li>
+        <li>
+          <strong>历史线上站点：</strong>项目曾上线域名 <code>bookway.xyz</code>，使用云服务商学生优惠一年；学生优惠已于2026‑10到期，服务器与域名服务现已下线，可通过本地Docker Compose复现完整运行环境。
+        </li>
+      </ul>
+    </div>
+
+    <p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>具备受限硬件下AI模型优化经验；FastAPI异步高并发后端、数据库ORM迁移、业务错误码体系工程实践；在10人项目中负责技术总负责人，主导6人开发质控小组研发流程、PR代码评审、容器化生产落地经验，匹配AI推理服务、后端开发岗位。</p>
+  </div>
 </details>
+
 
 <br>
 
