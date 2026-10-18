@@ -122,8 +122,8 @@ details.fold[open] > summary::before {
   text-align: center; /* 图片 + 图注全部居中 */
 }
 .img-wrap img {
-  max-width: 100%;
-  max-height: 620px; /* 限制图片最大高度 */
+  max-width: 80%;
+  max-height: 520px; /* 限制图片最大高度 */
   object-fit: contain; /* 不变形，完整显示原图 */
   border-radius: 8px;
 }
@@ -147,7 +147,7 @@ details.fold[open] > summary::before {
     background: #f7f9fa;
     padding: 1em;
     border-radius: 6px;
-    margin: 1em 0;
+    // margin: 1em 0;
 }
 .info-card h3 {
     margin-top: 0;  /* 卡片内部h3消除上边距，避免卡片内留白过多 */
