@@ -41,3 +41,33 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 </script>
+
+<!-- LightGallery 图片灯箱画廊 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/download/lg-download.min.js"></script>
+<!-- 新增：自动轮播插件，弹窗内手动开启自动播放 -->
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/autoplay/lg-autoplay.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.project-gallery').forEach((el) => {
+    lightGallery(el, {
+      plugins: [lgZoom, lgThumbnail, lgFullscreen, lgDownload, lgAutoplay],
+      download: true,
+      thumbnail: true,
+      showThumbnailByDefault:true,
+      zoom: true,
+      fullScreen: true,
+      keyPress: true,
+      counter: true,
+      slideShowAutoplay: false, // 默认关闭自动播放，访客点按钮才开启
+      slideShowInterval:4000, //开启后4秒切一张
+      autoplayControls:true //显示工具栏自动播放按钮
+    });
+  })
+})
+</script>
