@@ -68,7 +68,7 @@ redirect_from:
       <span>WebAR 轻量化实景追踪系统 ｜ <span class="highlight-text">算法与技术总负责人</span></span>
       <span style="font-weight: normal; color: #666;"><code>2025.09 - 2026.01</code></span>
     </h3>
-    <p><strong>项目背景：</strong>面向图书馆实景图书检索业务，在云端 <strong>2C4G 无 GPU</strong> 严苛硬件约束下，作为 <strong>7 人团队技术负责人</strong>，完成整套 WebAR 智能导引系统，实现浏览器端无需 APP 即可完成书脊检测、文本识别、检索导航。</p>
+    <p><strong>项目背景：</strong>面向图书馆实景图书检索业务，在云端 <strong>2C4G 无 GPU</strong> 严苛硬件约束下，作为 <strong>10 人团队技术负责人</strong>，完成整套 WebAR 智能导引系统，实现浏览器端无需 APP 即可完成书脊检测、文本识别、检索导航。</p>
     <ul>
       <li><strong>算法与轻量化：</strong>采集标注自建书脊 YOLO、OCR 数据集，完成 YOLOv8-Nano 训练；使用 ONNX 常量折叠、ConvBN 算子融合做轻量化；设计 IoM 嵌套过滤、透视坐标逆映射、多尺度预处理，构建 <strong>SQL-Levenshtein-LLM 三级检索状态机</strong>。</li>
       <li><strong>后端与工程化：</strong>搭建 FastAPI 分层后端，基于 SQLAlchemy + Alembic 落实 Code-First 数据库；Redis 轨迹缓存屏障，配置 LRU、TTL 过期策略；SSE 流式响应、Pydantic 契约校验、异常拦截；Docker 容器化部署，配置健康探针、模型预加载规避 OOM。</li>
