@@ -76,20 +76,19 @@ author_profile: true
     </div>
 
 
-<h3>(3) PaddleOCR书脊识别数据集与模型微调</h3>
-<p>使用YOLO检测输出裁剪得到真实书脊切片，构建书脊专属OCR识别数据集，采用SimpleDataSet格式组织样本；基于PP‑OCRv4‑rec‑student轻量权重做迁移微调，针对细长书脊场景调整输入尺寸、正则与增强策略，在验证集识别准确率达到0.906；完成Paddle静态推理图导出，剥离训练求导图，适配后端CPU推理部署。</p>
-<div class="project-gallery">
-  <a href="/assets/images/bookway/ocr_dataset.png" data-lg-caption="书脊OCR识别数据集样本，包含反光、形变的真实书脊切片">
-    <div class="img-wrap">
-      <img src="/assets/images/bookway/ocr_dataset.png" alt="OCR书脊数据集样本">
-      <p class="img-caption">书脊OCR识别数据集样本</p>
+    <h3>(3) PaddleOCR书脊识别数据集与模型微调</h3>
+    <p>使用YOLO检测输出裁剪得到真实书脊切片，构建书脊专属OCR识别数据集，采用SimpleDataSet格式组织样本；基于PP‑OCRv4‑rec‑student轻量权重做迁移微调，针对细长书脊场景调整输入尺寸、正则与增强策略，在验证集识别准确率达到0.906；完成Paddle静态推理图导出，剥离训练求导图，适配后端CPU推理部署。</p>
+    <div class="project-gallery">
+      <a href="/assets/images/bookway/ocr_dataset.png" data-lg-caption="书脊OCR识别数据集样本，包含反光、形变的真实书脊切片">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/ocr_dataset.png" alt="OCR书脊数据集样本">
+          <p class="img-caption">书脊OCR识别数据集样本</p>
+        </div>
+      </a>
     </div>
-  </a>
-</div>
-
-<h3>(4) 三级检索状态机，处理OCR识别噪声</h3>
-<p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
-
+    
+    <h3>(4) 三级检索状态机，处理OCR识别噪声</h3>
+    <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
 
     <h2>2. 后端系统架构与业务实现</h2>
     <ul>
