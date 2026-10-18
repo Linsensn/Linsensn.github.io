@@ -226,6 +226,19 @@ author_profile: true
       <span class="highlight-text">算法与技术总负责人 · 项目总规模6人</span>
       <span style="font-weight: normal; color: #666; margin-left:0.8em;"><code>2026.05 - 2026.07</code></span>
     </h3>
+    
+    <!-- 项目演示视频 -->
+    <div class="video-wrap">
+      <h2>项目演示视频</h2>
+      <div class="vertical-video">
+        <video controls muted>
+          <source src="/assets/videos/liteknow_demo.mp4" type="video/mp4">
+          你的浏览器不支持视频播放，请访问仓库查看演示。
+        </video>
+      </div>
+      <p class="video-caption">演示：微信小程序端完整流程，包含素材上传、课文摘要、智能出题、题库作答全业务闭环</p>
+    </div>
+    
     <p><strong>项目背景：</strong>面向学生自主备考场景，搭建多模态智能伴学Agent平台，解决学习素材碎片化、答疑同质化、缺少个性化习题生成的痛点；支持异构学习资料解析、大模型对话答疑、智能出题、错题回溯完整业务闭环。我作为团队<strong>技术总监</strong>，负责后端整体架构设计、核心模块编码实现，以及团队开发规范、容器化协作流程落地。</p>
     <p><strong>我的职责：</strong>主导后端分层架构、JWT‑RBAC鉴权权限体系设计；独立实现多模态文件解析中间件、LLM异步客户端与多模型动态路由；制定Alembic数据库迁移、Git PR评审、Docker开发环境全套团队规约，完成可容器化部署的Agent业务后端。</p>
 
@@ -241,6 +254,12 @@ author_profile: true
         <div class="img-wrap">
           <img src="/assets/images/liteknow/arch.png" alt="LiteKnow系统六层总体架构图">
           <p class="img-caption">LiteKnow六层系统总体架构图</p>
+        </div>
+      </a>
+      <a href="/assets/images/liteknow/api_test.png" data-lg-caption="后端核心接口联调测试与响应验证图，Swagger与Apifox契约校验，统一返回格式校验">
+        <div class="img-wrap">
+          <img src="/assets/images/liteknow/api_test.png" alt="后端核心接口联调测试与响应验证图">
+          <p class="img-caption">后端核心接口联调测试与响应验证</p>
         </div>
       </a>
     </div>
@@ -288,10 +307,16 @@ author_profile: true
       <li>完整业务链路包含参数校验、事务保护、会话关联，大模型输出异常做业务层兜底。</li>
     </ul>
     <div class="project-gallery">
-      <a href="/assets/images/liteknow/ai_seq.png" data-lg-caption="AI学习功能业务时序图，小程序请求‑鉴权‑Agent调用‑模型推理‑结果持久化完整链路">
+      <a href="/assets/images/liteknow/demo_summary.png" data-lg-caption="课文摘要生成功能交互演示：上传素材，AI流式生成课文解析摘要">
         <div class="img-wrap">
-          <img src="/assets/images/liteknow/ai_seq.png" alt="AI学习功能业务流转时序图">
-          <p class="img-caption="AI学习功能业务流转时序图">
+          <img src="/assets/images/liteknow/demo_summary.png" alt="课文摘要生成功能交互演示">
+          <p class="img-caption">课文摘要生成功能交互演示</p>
+        </div>
+      </a>
+      <a href="/assets/images/liteknow/demo_quiz.png" data-lg-caption="智能测验生成与作答交互演示：上传素材自动生成习题，题库管理与答题闭环">
+        <div class="img-wrap">
+          <img src="/assets/images/liteknow/demo_quiz.png" alt="智能测验生成与作答交互演示">
+          <p class="img-caption">智能测验生成与作答交互演示</p>
         </div>
       </a>
     </div>
