@@ -36,14 +36,13 @@ author_profile: true
 
     <p><strong>我的职责：</strong>负责计算机视觉算法方案设计、FastAPI后端整体架构设计；制定数据库、接口、代码注释规范；主导Issue‑PR驱动开发流程，负责代码评审与版本合并，完成容器化生产环境交付。</p>
 
-    <h2>1. 计算机视觉算法实现</h2>
-
+    <h2>1. 计算机视觉算法实现</h3>
     <h3>(1) 书脊YOLO数据集构建与标注</h3>
     <ul>
       <li>深入真实图书馆采集<strong>实景书架</strong>图像，样本覆盖正常光照、逆光阴影、大透视畸变、书籍密集挤压等复杂长尾场景。</li>
       <li>制定整套标注质量规范，仅标注书脊<strong>主书名</strong>title类别；针对倾斜书脊采用向内收缩标注框策略，避免框入相邻书本文字。</li>
       <li>引入<strong>负样本</strong>图片，抑制模型对非书脊区域产生误检。</li>
-      <li>数据集严格按照8:1:1比例划分为训练集、验证集、测试集。</li>
+      <li>数据集严格按照<strong>8:1:1</strong>比例划分为训练集、验证集、测试集。</li>
     </ul>
     <div class="project-gallery">
       <a href="/assets/images/bookway/dataset_sample.jpg" data-lg-caption="图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景">
@@ -61,8 +60,11 @@ author_profile: true
     </div>
     
     <h3>(2) YOLOv8‑Nano模型训练与ONNX轻量化导出</h3>
-    <p>以YOLOv8‑Nano作为预训练基座，开启矩形训练，关闭mosaic、mixup等会扭曲书脊形态的数据增强；训练100个epoch，得到mAP50=0.978检测模型。通过ONNX执行常量折叠、Conv‑BN算子融合做模型简化；设计IoM嵌套过滤、透视坐标逆映射、多尺度预处理方案，解决密集书架场景的重复误检问题。
-    模型训练在本地工作站i7‑13700H + RTX4060(8G)完成，云端2C4G服务器仅执行推理，做到训练与推理硬件分离。</p>
+    <ul>
+      <li>以<strong>YOLOv8‑Nano</strong>作为预训练基座，开启矩形训练，关闭<code>mosaic</code>、<code>mixup</code>等会扭曲书脊形态的数据增强；训练<strong>100个epoch</strong>，得到 <strong>mAP50=0.978</strong> 的检测模型。</li>
+      <li>通过<strong>ONNX</strong>执行常量折叠、Conv‑BN算子融合完成模型简化；设计<strong>IoM嵌套过滤</strong>、透视坐标逆映射、多尺度预处理方案，解决密集书架场景的重复误检问题。</li>
+      <li>模型训练在本地工作站 <strong>i7‑13700H + RTX4060(8G)</strong> 完成；云端<strong>2C4G</strong>服务器仅执行推理，实现训练与推理硬件分离。</li>
+    </ul>
     <div class="project-gallery">
       <a href="/assets/images/bookway/yolo_curve.png" data-lg-caption="YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力">
         <div class="img-wrap">
@@ -77,11 +79,14 @@ author_profile: true
         </div>
       </a>
     </div>
-
+    
     <h3>(3) PaddleOCR书脊识别数据集与模型微调</h3>
-    <p>使用YOLO检测输出裁剪得到真实书脊切片，构建书脊专属OCR识别数据集，采用SimpleDataSet格式组织样本；基于PP‑OCRv4‑rec‑student轻量蒸馏权重开展迁移微调。
-    针对细长书脊场景定制训练策略：设置输入张量[3,48,640]，配置5轮warmup预热、L2正则抑制过拟合，启用MultiScaleSampler多尺度采样；在Epoch74拿到全局最优权重，验证集识别准确率acc达到0.906，归一化编辑距离norm_edit_dis=0.990，单图推理fps约3.8。
-    训练完成后导出Paddle静态推理图，剥离训练反向传播求导逻辑，去除训练框架依赖，适配2C4G无GPU后端CPU推理部署。</p>
+    <ul>
+      <li>使用YOLO检测输出裁剪得到真实书脊切片，构建书脊专属OCR识别数据集，采用<strong>SimpleDataSet</strong>格式组织样本；基于<strong>PP‑OCRv4‑rec‑student</strong>轻量蒸馏权重开展迁移微调。</li>
+      <li>针对细长书脊场景定制训练策略：设置输入张量<code>[3,48,640]</code>，配置<strong>5轮warmup预热</strong>、L2正则抑制过拟合，启用MultiScaleSampler多尺度采样。</li>
+      <li>在<strong>Epoch74</strong>拿到全局最优权重；验证集识别准确率 <strong>acc=0.906</strong>，归一化编辑距离 <strong>norm_edit_dis=0.990</strong>，单图推理fps约<strong>3.8</strong>。</li>
+      <li>训练完成后导出Paddle静态推理图，剥离训练反向传播求导逻辑，去除训练框架依赖，适配<strong>2C4G无GPU</strong>后端CPU推理部署。</li>
+    </ul>
     <div class="project-gallery">
       <a href="/assets/images/bookway/ocr_dataset.png" data-lg-caption="书脊OCR识别数据集样本，包含反光、形变的真实书脊切片">
         <div class="img-wrap">
@@ -96,15 +101,23 @@ author_profile: true
         </div>
       </a>
     </div>
-
+    
     <h3>(4) 三级检索状态机，处理OCR识别噪声</h3>
-    <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。
-    在Levenshtein编辑距离中针对OCR常见形近字（0/O、1/l等）做替换代价降权；大模型纠错识别出新书名后，写入<code>PendingBook</code>待确认隔离库；当同一书籍累计扫描达到5次触发自动晋升，迁移至正式图书库。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
+    <ul>
+      <li>针对OCR输出存在错字、形近字识别偏差，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。</li>
+      <li>在Levenshtein编辑距离中针对OCR常见形近字（0/O、1/l等）做<strong>替换代价降权</strong>处理。</li>
+      <li>大模型纠错识别出新书名后，写入<code>PendingBook</code>待确认隔离库；同一书籍累计扫描达到<strong>5次</strong>触发自动晋升，迁移至正式图书库。</li>
+      <li>层层过滤识别噪声，提升书脊识别出错场景下的书籍检索成功率。</li>
+    </ul>
     
     <h2>2. 后端系统架构与业务实现</h2>
     
     <h3>(1) FastAPI分层架构与Code‑First数据库设计</h3>
-    <p>搭建路由层‑业务层‑CRUD‑ORM模型‑Schema契约层完整分层架构；采用Code‑First开发模式，基于SQLAlchemy定义数据模型，配合Alembic完成数据库版本迁移，禁止手写DDL建表语句；封装全局依赖注入，自动管理数据库会话生命周期，请求结束自动归还连接池，避免连接泄露。</p>
+    <ul>
+      <li>搭建<strong>路由层‑业务层‑CRUD‑ORM模型‑Schema契约层</strong>完整分层架构。</li>
+      <li>采用<strong>Code‑First</strong>开发模式，基于<strong>SQLAlchemy</strong>定义数据模型，配合<strong>Alembic</strong>完成数据库版本迁移，禁止手写DDL建表语句。</li>
+      <li>封装全局依赖注入，自动管理数据库会话生命周期，请求结束自动归还连接池，避免数据库连接泄露。</li>
+    </ul>
     <div class="project-gallery">
       <a href="/assets/images/bookway/arch.png" data-lg-caption="系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块">
         <div class="img-wrap">
@@ -115,10 +128,18 @@ author_profile: true
     </div>
     
     <h3>(2) Redis轨迹缓存与SSE流式推送</h3>
-    <p>基于<code>track_id</code>实现WebAR连续帧轨迹会话缓存，设置TTL=300s缓存过期，Redis配置maxmemory=512MB与allkeys‑lru内存淘汰策略；实现缓存动态击穿逻辑：仅当新帧OCR置信度、文本质量显著提升才重新执行全链路推理，避免重复算力消耗；采用SSE Server‑Sent‑Events长流式协议，将YOLO检测、OCR识别结果逐块实时推送给前端WebAR，降低交互延迟。</p>
+    <ul>
+      <li>基于<code>track_id</code>实现WebAR连续帧轨迹会话缓存，设置 <strong>TTL=300s</strong> 缓存过期；Redis配置 <strong>maxmemory=512MB</strong> 与 <strong>allkeys‑lru</strong> 内存淘汰策略。</li>
+      <li>实现<strong>缓存动态击穿逻辑</strong>：仅当新帧OCR置信度、文本质量显著提升才重新执行全链路推理，减少重复算力消耗。</li>
+      <li>采用<strong>SSE Server‑Sent‑Events</strong>长流式协议，将YOLO检测、OCR识别结果逐块实时推送给前端WebAR，降低交互延迟。</li>
+    </ul>
     
     <h3>(3) 全局异常体系、业务错误码与并发限流防护</h3>
-    <p>搭建完整的异常拦截防护体系，区分HTTP协议异常与自定义业务错误码，视觉类异常使用<code>1xxxx</code>区间，资源限流类异常使用<code>3xxxx</code>区间；全局拦截器捕获各类异常，脱敏后返回标准化JSON响应，不向外暴露底层堆栈信息；实现并发信号量限流，对图像推理任务做并发管控，在腾讯云2C4G无GPU轻量服务器硬件约束下，防止CPU、内存被打满触发OOM。</p>
+    <ul>
+      <li>搭建完整异常拦截防护体系，区分HTTP协议异常和自定义业务错误码；视觉类异常使用<strong>1xxxx</strong>区间，资源限流类异常使用<strong>3xxxx</strong>区间。</li>
+      <li>全局拦截器捕获各类异常，脱敏后返回标准化JSON响应，不向外暴露底层堆栈信息。</li>
+      <li>实现<strong>并发信号量限流</strong>，对图像推理任务做并发管控；在腾讯云<strong>2C4G无GPU</strong>轻量服务器约束下，防止CPU、内存占满触发OOM内存溢出。</li>
+    </ul>
     <div class="project-gallery">
       <a href="/assets/images/bookway/search_seq.png" data-lg-caption="三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程">
         <div class="img-wrap">
@@ -127,12 +148,17 @@ author_profile: true
         </div>
       </a>
     </div>
-
+    
     <h2>3. 工程化落地与团队研发管理</h2>
-
     <h3>(1) Docker容器化部署与高可用自愈体系</h3>
-    <p>采用Docker Compose完成整套业务编排，使用Multi‑stage多阶段构建精简镜像体积；Uvicorn ASGI服务限定单进程运行，避免AI模型多进程内存冗余。依托FastAPI <code>Lifespan</code>生命周期事件，容器启动阶段预加载YOLO、OCR模型至内存，消除请求到来时模型加载带来的冷启动OOM风险；配置容器健康探针 <code>HEALTHCHECK</code> 配合 <code>restart: always</code> 策略实现故障自动重启自愈；服务器配置Swap交换分区应对瞬时内存峰值。
-    集成Dozzle轻量监控组件，极低开销观测全容器CPU、内存指标；基于loguru实现结构化分级日志，通过<code>X‑Device‑ID</code>作为TraceID完成全链路请求追踪，日志按大小、生命周期自动轮转，挂载宿主机卷持久化保存运行现场。</p>
+    <ul>
+      <li>采用<strong>Docker Compose</strong>完成整套业务编排；使用<strong>Multi‑stage多阶段构建</strong>策略精简镜像体积。</li>
+      <li>Uvicorn ASGI服务限定<strong>单进程</strong>运行，规避AI模型多进程带来的内存冗余开销。</li>
+      <li>依托FastAPI <code>Lifespan</code>生命周期事件，容器启动阶段预加载YOLO、OCR模型至内存，消除请求到来时模型加载造成的<strong>冷启动OOM</strong>风险。</li>
+      <li>配置容器健康探针 <code>HEALTHCHECK</code> 配合 <code>restart: always</code>，实现故障容器秒级自动重启自愈；服务器配置<strong>Swap交换分区</strong>应对瞬时内存峰值。</li>
+      <li>集成<strong>Dozzle</strong>轻量监控组件，极低开销观测全容器CPU、内存指标；基于<strong>loguru</strong>实现结构化分级日志。</li>
+      <li>以<code>X‑Device‑ID</code>作为TraceID实现<strong>全链路请求追踪</strong>；日志配置大小、生命周期自动轮转，挂载宿主机卷持久化保存运行现场。</li>
+    </ul>
     <div class="project-gallery">
       <a href="/assets/images/bookway/deploy_arch.png" data-lg-caption="生产环境Docker容器部署拓扑架构，Nginx、FastAPI、Redis、MySQL组件网络关系">
         <div class="img-wrap">
@@ -143,12 +169,21 @@ author_profile: true
     </div>
     
     <h3>(2) Issue‑PR驱动团队研发流程与代码规约</h3>
-    <p>项目全程推行Issue驱动开发模式，统一制定分支命名、Git commit提交规范；所有特性开发完成后提交Pull Request，必须经过代码评审 + QC质控真机验收门禁才可合入主干分支。
-    统一VSCode代码片段模板，强制文件头部注释、函数docstring文档字符串，标准化编码格式，满足软件著作权申请材料规范。数据库变更严格遵守Code‑First协同规约，只修改SQLAlchemy模型，由Alembic自动生成迁移脚本，禁止直接手写DDL操作数据库。</p>
+    <ul>
+      <li>推行<strong>Issue驱动开发</strong>模式，统一分支命名、Git commit提交规范。</li>
+      <li>所有特性开发完成提交Pull Request，必须经过<strong>代码评审 + QC质控真机验收门禁</strong>，才可合入主干分支。</li>
+      <li>统一VSCode代码片段模板，强制文件头部注释、函数<strong>docstring</strong>文档字符串，满足软件著作权申请的编码材料规范。</li>
+      <li>数据库变更严格遵守<strong>Code‑First协同规约</strong>，只修改SQLAlchemy模型，通过Alembic自动生成迁移脚本，禁止直接手写DDL操作数据库。</li>
+    </ul>
     
     <h3>(3) 本地联调、接口测试与QC验收闭环流程</h3>
-    <p>本地开发不部署独立MySQL实例，通过SSH隧道端口转发访问共享云端测试数据库；本地全部使用Docker Compose开发容器，保证开发环境与生产环境基线完全对齐。
-    质量验收分为两层：黑盒层面使用Apifox执行接口契约测试，校验业务错误码、边界输入；白盒层面做服务端容器日志审计，排查被框架静默吞噬的异常。只有接口用例全部通过、无异常堆栈输出，PR才允许合并进入主干。</p>
+    <ul>
+      <li>本地开发不部署独立MySQL实例，通过<strong>SSH隧道端口转发</strong>访问共享云端测试数据库。</li>
+      <li>本地全部使用Docker Compose开发容器，保证开发环境与生产环境<strong>基线完全对齐</strong>。</li>
+      <li>黑盒测试：使用<strong>Apifox</strong>执行接口契约测试，校验业务错误码与边界输入。</li>
+      <li>白盒测试：执行服务端容器<strong>日志审计</strong>，排查框架静默吞噬的异常堆栈。</li>
+      <li>接口用例全部通过、无异常堆栈输出，PR才允许合并进入主干分支。</li>
+    </ul>
 
     <!-- 核心量化成果 -->
     <div class="info-card">
