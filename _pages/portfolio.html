@@ -23,10 +23,12 @@ author_profile: true
     <!-- 项目演示视频 -->
     <div class="video-wrap">
       <h2>项目演示视频</h2>
-      <video controls muted>
-        <source src="/assets/videos/bookway_demo.mp4" type="video/mp4">
-        你的浏览器不支持视频播放，请访问仓库查看演示。
-      </video>
+      <div class="vertical-video">
+        <video controls muted autoplay>
+          <source src="/assets/videos/bookway_demo.mp4" type="video/mp4">
+          你的浏览器不支持视频播放，请访问仓库查看演示。
+        </video>
+      </div>
       <p class="video-caption">演示：移动端浏览器扫码直接使用WebAR，完成书脊识别、检索、实景导航，无需安装App</p>
     </div>
 
@@ -35,27 +37,64 @@ author_profile: true
     <p><strong>我的职责：</strong>负责计算机视觉算法方案设计、FastAPI后端整体架构设计；制定数据库、接口、代码注释规范；主导Issue‑PR驱动开发流程，负责代码评审与版本合并，完成容器化生产环境交付。</p>
 
     <h2>1. 计算机视觉算法实现</h2>
-    <ul>
-      <li>自建图书馆实景数据集，完成书脊目标检测、OCR识别数据采集、标注与清洗；针对密集书架、大透视畸变、逆光阴影做场景覆盖；严格执行标注质量管控策略。</li>
-      <li>基于YOLOv8‑Nano完成迁移训练；通过ONNX做常量折叠、Conv‑BN算子融合模型轻量化；设计IoM嵌套过滤、透视坐标逆映射、多尺度预处理解决密集场景误检。</li>
-      <li>构建<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>三级检索状态机，处理OCR识别错字、形近字干扰。</li>
-    </ul>
 
-    <!-- ========== 画廊A：【算法模块专属】 ========== -->
+    <h3>(1) 书脊YOLO数据集构建与标注</h3>
+    <p>深入真实图书馆采集实景书架图像，样本覆盖正常光照、逆光阴影、大透视畸变、书籍密集挤压等复杂长尾场景；制定整套标注质量规范，只标注书脊主书名title类别，针对倾斜书脊采用向内收缩标注框策略，引入负样本抑制误检；数据集按8:1:1划分为训练集、验证集、测试集。</p>
+    <!-- 本小节多张图片示例，放在同一个project‑gallery -->
+    <div class="project-gallery">
+      <a href="/assets/images/bookway/dataset_sample.jpg" data-lg-caption="图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/dataset_sample.jpg" alt="数据集标注样例">
+          <p class="img-caption">数据集标注可视化样例</p>
+        </div>
+      </a>
+      <a href="/assets/images/bookway/label_stat.png" data-lg-caption="数据集标签分布统计图，书脊目标框多为细长高宽比">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/label_stat.png" alt="数据集标签分布统计图">
+          <p class="img-caption">数据集标签分布统计图</p>
+        </div>
+      </a>
+    </div>
+    
+    <h3>(2) YOLOv8‑Nano模型训练与ONNX轻量化导出</h3>
+    <p>以YOLOv8‑Nano作为预训练基座，开启矩形训练，关闭mosaic、mixup等会扭曲书脊形态的数据增强；训练100个epoch，得到mAP50=0.978检测模型。通过ONNX执行常量折叠、Conv‑BN算子融合做模型简化；设计IoM嵌套过滤、透视坐标逆映射、多尺度预处理方案，解决密集书架场景的重复误检问题。
+    模型训练在本地工作站i7‑13700H + RTX4060(8G)完成，云端2C4G服务器仅执行推理，做到训练与推理硬件分离。</p>
     <div class="project-gallery">
       <a href="/assets/images/bookway/yolo_curve.png" data-lg-caption="YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力">
         <div class="img-wrap">
           <img src="/assets/images/bookway/yolo_curve.png" alt="YOLOv8‑Nano训练损失与精度收敛曲线">
-          <p class="img-caption">YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力</p>
+          <p class="img-caption">YOLOv8‑Nano训练损失、mAP精度收敛曲线</p>
         </div>
       </a>
-      <a href="/assets/images/bookway/dataset_sample.png" data-lg-caption="图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景">
+      <a href="/assets/images/bookway/conf_matrix.png" data-lg-caption="混淆矩阵与PR‑Recall曲线，mAP50达到0.978">
         <div class="img-wrap">
-          <img src="/assets/images/bookway/dataset_sample.png" alt="数据集标注样例">
-          <p class="img-caption">图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景</p>
+          <img src="/assets/images/bookway/conf_matrix.png" alt="混淆矩阵与PR‑Recall曲线">
+          <p class="img-caption">混淆矩阵与PR‑Recall曲线</p>
         </div>
       </a>
     </div>
+
+    <h3>(3) PaddleOCR书脊识别数据集与模型微调</h3>
+    <p>使用YOLO检测输出裁剪得到真实书脊切片，构建书脊专属OCR识别数据集，采用SimpleDataSet格式组织样本；基于PP‑OCRv4‑rec‑student轻量蒸馏权重开展迁移微调。
+    针对细长书脊场景定制训练策略：设置输入张量[3,48,640]，配置5轮warmup预热、L2正则抑制过拟合，启用MultiScaleSampler多尺度采样；在Epoch74拿到全局最优权重，验证集识别准确率acc达到0.906，归一化编辑距离norm_edit_dis=0.990，单图推理fps约3.8。
+    训练完成后导出Paddle静态推理图，剥离训练反向传播求导逻辑，去除训练框架依赖，适配2C4G无GPU后端CPU推理部署。</p>
+    <div class="project-gallery">
+      <a href="/assets/images/bookway/ocr_dataset.png" data-lg-caption="书脊OCR识别数据集样本，包含反光、形变的真实书脊切片">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/ocr_dataset.png" alt="OCR书脊数据集样本">
+          <p class="img-caption">书脊OCR识别数据集样本</p>
+        </div>
+      </a>
+      <a href="/assets/images/bookway/ocr_train_log.png" data-lg-caption="OCR模型训练日志，Epoch74取得最优识别精度">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/ocr_train_log.png" alt="OCR训练日志截图">
+          <p class="img-caption">OCR模型训练日志截图</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(4) 三级检索状态机，处理OCR识别噪声</h3>
+    <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
 
     <h2>2. 后端系统架构与业务实现</h2>
     <ul>

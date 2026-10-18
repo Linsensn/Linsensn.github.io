@@ -165,3 +165,37 @@ details.fold[open] > summary::before {
     margin-top:0.4em;
 }
 
+/* 竖屏手机录屏视频样式：适合 9:16 手机录屏 */
+.vertical-video {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.vertical-video video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* ========= LightGallery弹窗：图片底部渐变背景图注 ========= */
+.lg-sub-html {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2.2rem 1rem 1rem;
+    /* 从上到下黑色半透明渐变 */
+    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+    color:#ffffff;
+}
+.lg-sub-html h4 {
+    margin:0 0 0.4rem 0;
+    font-size:1.1rem;
+}
+.lg-sub-html p {
+    margin:0;
+    font-size:0.95rem;
+    opacity:0.95;
+}
+
