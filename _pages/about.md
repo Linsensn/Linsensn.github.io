@@ -61,7 +61,7 @@ redirect_from:
 </h2>
 
 面向学生自主备考场景，搭建多模态智能伴学 Agent，实现异构学习资料解析与大模型对话答疑闭环。<br>
-**技术栈：FastAPI、Alembic、JWT、OpenCV、PaddleOCR、DeepSeek、GLM、Pydantic、SSE、Docker** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/LiteKnow)
+**技术栈：FastAPI、SQLAlchemy、Alembic、JWT、Pydantic、OpenCV、PaddleOCR、PyMuPDF、DeepSeek、GLM、LangChain、SSE、Docker、MySQL** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/LiteKnow)
 
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>基于大语言模型的高并发推理与微调系统 ｜ 技术总负责人</span>
