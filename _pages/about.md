@@ -53,7 +53,7 @@ redirect_from:
 </h2>
 
 面向图书馆实景检索业务，在云端无 GPU 的严苛硬件约束下，实现浏览器端无需 APP 的实景导引。<br>
-**技术栈：YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/bookway)
+**技术栈：YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、MySQL、Docker、Nginx、JWT** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/bookway)
 
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>基于大语言模型的多模态Agent伴学交互系统 ｜ 技术总负责人</span>
