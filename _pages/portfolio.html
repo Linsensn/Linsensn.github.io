@@ -16,25 +16,27 @@ author_profile: true
   }
 </style>
 
-<!-- ============ 项目详情（仅此部分，其余一概不写） ============ -->
-
 <!-- ===== 项目一 ===== -->
-<h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
-  <span>① WebAR 轻量化实景追踪系统 ｜ <span class="highlight-text">算法与技术总负责人</span></span>
-  <span style="font-weight: normal; color: #666;"><code>2025.09 - 2026.01</code></span>
-</h2>
-<p><strong>项目背景：</strong>面向高校图书馆密集书架排布的实景图书检索业务，在云端 <strong>2C4G 无 GPU</strong> 的极小算力约束与大透视畸变场景下，作为 <strong>7 人团队技术负责人</strong>，交付整套 WebAR 智能导引系统，实现浏览器端无需 APP 即可完成书脊检测、文本识别、检索导航。</p>
-<p><strong>我的职责：</strong>负责整体算法方案设计与后端工程架构，统筹团队协作与代码质量门禁。</p>
-<ul>
-  <li><strong>算法与轻量化：</strong>采集标注自建书脊 YOLO、OCR 数据集，完成 YOLOv8-Nano 训练；使用 ONNX 常量折叠、ConvBN 算子融合做模型收缩，实现 <span class="highlight-text">纯 CPU 毫秒级推理</span>（mAP50 = <span class="highlight-text">0.978</span>）。</li>
-  <li><strong>检索与识别：</strong>设计 IoM 嵌套过滤解决密集场景误检，透视坐标逆映射 + 多尺度预处理完成文本 ROI 提取；构建“精确匹配 → 编辑距离纠偏 → LLM 语义纠错”<strong>三级检索状态机</strong>。</li>
-  <li><strong>后端与工程化：</strong>搭建 FastAPI 分层后端，SQLAlchemy + Alembic 落实 Code-First 数据库；Redis 轨迹缓存屏障（LRU/TTL）；SSE 流式响应、Pydantic 契约校验、异常拦截；Docker 容器化部署，健康探针 + 模型预加载规避 OOM。</li>
-  <li><strong>团队管理：</strong>制定 Issue 驱动开发、Git 分支、PR 评审质控门禁，统一团队数据库迁移、接口定义、代码注释全套规范。</li>
-  <li><strong>量化成果：</strong>依靠缓存、异步限流策略保障高并发图像请求下系统 <span class="highlight-text">零宕机</span>；完成端到端业务闭环，容器化可直接部署上线，配套完整工程开发文档。</li>
-</ul>
-<p><strong>技术栈：</strong>YOLOv8-Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT
+<details class="fold" open>
+  <summary>WebAR 轻量化实景追踪系统</summary>
+    <h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
+      <span class="highlight-text">算法与技术总负责人</span>
+      <span style="font-weight: normal; color: #666;"><code>2025.09 - 2026.01</code></span>
+    </h2>
+    <p><strong>项目背景：</strong>面向高校图书馆密集书架排布的实景图书检索业务，在云端 <strong>2C4G 无 GPU</strong> 的极小算力约束与大透视畸变场景下，作为 <strong>7 人团队技术负责人</strong>，交付整套 WebAR 智能导引系统，实现浏览器端无需 APP 即可完成书脊检测、文本识别、检索导航。</p>
+    <p><strong>我的职责：</strong>负责整体算法方案设计与后端工程架构，统筹团队协作与代码质量门禁。</p>
+    <ul>
+      <li><strong>算法与轻量化：</strong>采集标注自建书脊 YOLO、OCR 数据集，完成 YOLOv8-Nano 训练；使用 ONNX 常量折叠、ConvBN 算子融合做模型收缩，实现 <span class="highlight-text">纯 CPU 毫秒级推理</span>（mAP50 = <span class="highlight-text">0.978</span>）。</li>
+      <li><strong>检索与识别：</strong>设计 IoM 嵌套过滤解决密集场景误检，透视坐标逆映射 + 多尺度预处理完成文本 ROI 提取；构建“精确匹配 → 编辑距离纠偏 → LLM 语义纠错”<strong>三级检索状态机</strong>。</li>
+      <li><strong>后端与工程化：</strong>搭建 FastAPI 分层后端，SQLAlchemy + Alembic 落实 Code-First 数据库；Redis 轨迹缓存屏障（LRU/TTL）；SSE 流式响应、Pydantic 契约校验、异常拦截；Docker 容器化部署，健康探针 + 模型预加载规避 OOM。</li>
+      <li><strong>团队管理：</strong>制定 Issue 驱动开发、Git 分支、PR 评审质控门禁，统一团队数据库迁移、接口定义、代码注释全套规范。</li>
+      <li><strong>量化成果：</strong>依靠缓存、异步限流策略保障高并发图像请求下系统 <span class="highlight-text">零宕机</span>；完成端到端业务闭环，容器化可直接部署上线，配套完整工程开发文档。</li>
+    </ul>
+    <p><strong>技术栈：</strong>YOLOv8-Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT
   · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/bookway" target="_blank">GitHub 源码</a> · <a href="https://gitee.com/bookway-studio/bookway" target="_blank">Gitee 源码</a></p>
-<p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>端侧 / 云端低算力模型优化能力 + 高并发后端稳定性 + 完整工程化交付，贴近推理服务与业务后端场景。</p>
+    <p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>端侧 / 云端低算力模型优化能力 + 高并发后端稳定性 + 完整工程化交付，贴近推理服务与业务后端场景。</p>
+  </div>
+</details>
 
 <br>
 
