@@ -370,19 +370,128 @@ author_profile: true
 <details class="fold" open>
   <summary>基于大语言模型的高并发推理与微调系统</summary>
   <div>
-    <h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
-      <span class="highlight-text">算法与技术总负责人</span>
-      <span style="font-weight: normal; color: #666;"><code>2026.06 - 2026.08</code></span>
-    </h2>
-    <p><strong>项目背景：</strong>针对电商评论分析场景，解决大模型处理欲扬先抑、欲抑先扬等复杂情感文本时易被关键词误导产生极性识别反转，以及多模型交叉验证时显存溢出、I/O 阻塞问题；基于 Llama3-8B 与 4.5 万条全量数据集构建高并发评测系统。</p>
-    <p><strong>我的职责：</strong>负责微调 / 量化方案、推理优化与并发评测工具的设计与实现。</p>
+    <h3 style="margin-top:0.5em;">
+      <span class="highlight-text">算法与技术总负责人 · 项目总规模4人</span>
+      <span style="font-weight: normal; color: #666; margin-left:0.8em;"><code>2026.06 - 2026.08</code></span>
+    </h3>
+    <p><strong>项目背景：</strong>面向电商商品评论情感分析场景，解决大模型面对反讽、欲扬先抑等复杂修辞文本，容易被关键词误导造成极性误判；同时解决多模型交叉验证场景下重复加载权重带来显存溢出、IO阻塞问题。基于Llama3‑8B‑Chinese‑Chat与四万余条真实电商评论数据集，完成PEFT高效微调消融实验，并搭建一套支持多模型并发对比的高自动化评测推理系统。</p>
+    <p><strong>我的职责：</strong>我完整主导数据集预处理、自动化消融实验流水线开发；设计LoRA / QLoRA / DoRA多套微调对比方案；实现<strong>单基座常驻 + Adapter毫秒级热插拔</strong>推理架构；构建带异常容错的工业级评测链路，完成指标计算、错例挖掘与实验结果分析。</p>
+
+    <h2>1. 数据集预处理与自动化消融实验流水线</h2>
+    <h3>(1) 数据集清洗与多规模分层采样</h3>
     <ul>
-      <li><strong>模型微调与评测：</strong>搭建自动化实验流水线，完成多量级数据集消融实验与多架构横向对比；通过混淆矩阵分析 4bit 量化、DoRA 机制带来的模型行为变化。</li>
-      <li><strong>推理优化：</strong>底层实现 <span class="highlight-text">“单基座常驻 + 多 Adapter 毫秒级热插拔”</span>，规避多模型切换时权重重复加载；设计强校验异常拦截、逆向惩罚状态机抑制模型输出发散。</li>
-      <li><strong>量化成果：</strong>全量模型准确率 <span class="highlight-text">91.54%</span>、F1 = <span class="highlight-text">0.9129</span>；大幅降低多模型切换显存开销，交付可交互的大模型批量评测能力。</li>
+      <li>基于ModelScope电商评论数据集，过滤空值脏样本，设定固定随机种子seed=42保证实验可复现；构建Small(500条)、Medium(3000条)、Full全量(45366条)三套不同规模指令微调数据集，转换为LLaMA‑Factory指令JSON格式。</li>
+      <li>设计专用System Prompt约束输出，强制模型只输出0/1二分类标签，为后续自动化评测打下基础。</li>
     </ul>
-    <p><strong>技术栈：</strong>PyTorch、Llama-3-8B、4bit 量化、DoRA、LoRA、QLoRA、Adapter 热插拔、大模型并发评测
-      · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/llama3-sentiment-concurrent" target="_blank">GitHub 源码</a></p>
-    <p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>LLM 微调 / 量化 / 推理优化 + 并发工程能力，贴近大模型推理与训练优化方向。</p>
+    <div class="project-gallery">
+      <a href="/assets/images/llama3/data_perf.png" data-lg-caption="不同数据集规模下模型Accuracy、Recall、F1性能指标柱状对比图">
+        <div class="img-wrap">
+          <img src="/assets/images/llama3/data_perf.png" alt="不同数据集规模性能指标对比">
+          <p class="img-caption">不同数据集规模性能指标对比</p>
+        </div>
+      </a>
+      <a href="/assets/images/llama3/loss_curve.png" data-lg-caption="Small/Medium/Full三套数据集训练损失收敛曲线对比">
+        <div class="img-wrap">
+          <img src="/assets/images/llama3/loss_curve.png" alt="多规模数据集训练损失收敛曲线">
+          <p class="img-caption">多规模数据集训练损失收敛曲线</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) Python自动化无人值守实验调度流水线</h3>
+    <ul>
+      <li>放弃手工UI配置，自主编写YAML动态修改+子进程调度流水线脚本；输入超参数矩阵，自动生成临时训练配置，串行执行训练、评估闭环。</li>
+      <li>统一配置eval/save策略，开启<code>load_best_model_at_end</code>保存每一组实验最优权重，实现LoRA、QLoRA、DoRA、多rank/学习率网格搜索的批量消融实验。</li>
+    </ul>
+
+    <h2>2. PEFT微调架构消融与超参数寻优实验</h2>
+    <h3>(1) LoRA / QLoRA / DoRA 架构横向对比</h3>
+    <ul>
+      <li>固定Medium数据集，控制变量对比基础LoRA、4‑bit QLoRA、DoRA三种PEFT微调方案；观察量化带来的<strong>精确率‑召回率跷跷板效应</strong>：QLoRA提升精确率，但召回率发生明显下滑，模型决策变得保守。</li>
+      <li>实验发现二元情感分类任务下DoRA并未带来显著收益，任务复杂度饱和，高级解耦机制出现性能溢出。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/llama3/arch_ablation.png" data-lg-caption="LoRA / QLoRA / DoRA架构消融指标与混淆矩阵对比">
+        <div class="img-wrap">
+          <img src="/assets/images/llama3/arch_ablation.png" alt="PEFT架构消融实验结果">
+          <p class="img-caption">PEFT架构消融实验结果</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) Rank与学习率网格搜索超参数寻优</h3>
+    <ul>
+      <li>对Rank(4/8/16)、学习率(1e‑05 / 5e‑05 /1e‑04)开展网格化消融，寻找任务最优超参数组合。</li>
+      <li>分析训练/验证损失曲线，验证并非Rank越大效果越好，过大秩参数会引入潜在过拟合风险；找到本任务最优Rank=8、LR=1e‑04配置。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/llama3/hyper_ablation.png" data-lg-caption="Rank、学习率多组超参数消融F1与损失收敛曲线">
+        <div class="img-wrap">
+          <img src="/assets/images/llama3/hyper_ablation.png" alt="超参数网格消融实验">
+          <p class="img-caption">超参数网格消融实验</p>
+        </div>
+      </a>
+    </div>
+
+    <h2>3. 单基座常驻，Adapter热插拔高并发推理系统</h2>
+    <h3>(1) 显存常驻+多适配器毫秒级切换架构</h3>
+    <ul>
+      <li>解决传统方案反复加载完整模型造成大量显存IO开销：<strong>底座Llama3‑8B在GPU显存仅加载一次</strong>，多个LoRA适配器权重后续挂载进同一份基座。</li>
+      <li>调用PeftModel <code>load_adapter</code> / <code>set_adapter</code>接口，实现不同实验模型之间毫秒级热切换，支持对同一条评论批量跑全部消融模型做横向对比评测。</li>
+    </ul>
+
+    <h3>(2) 交互评测控制台压力测试</h3>
+    <ul>
+      <li>搭建交互式命令行评测终端，输入评论文本自动调用全部已挂载模型输出预测结果。</li>
+      <li>使用带有反讽、欲扬先抑的复杂长尾样本做压力测试；验证只有Full全量数据集训练出来的模型，才具备识别字面正向实际为差评的语义反转能力。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/llama3/interactive_case.png" data-lg-caption="交互式多模型反讽评论预测输出对比，Small/Medium/Full模型对同一条反讽评论预测结果差异">
+        <div class="img-wrap">
+          <img src="/assets/images/llama3/interactive_case.png" alt="交互式多模型反讽评论预测输出对比">
+          <p class="img-caption">交互式多模型反讽评论预测输出对比</p>
+        </div>
+      </a>
+    </div>
+
+    <h2>4. 工业级评测容错、错例挖掘与结果分析</h2>
+    <h3>(1) 输出格式异常拦截与逆向惩罚状态机</h3>
+    <ul>
+      <li>针对生成式大模型输出乱码、拒绝回答、非0/1格式崩溃问题，实现捕获拦截逻辑；一旦输出格式非法，强制标记为预测错误，保证Acc、Precision、Recall、F1指标不受异常输出污染。</li>
+      <li>基于scikit‑learn自动计算全套分类指标，导出预测结果、混淆矩阵便于后续错例回溯。</li>
+    </ul>
+
+    <h3>(2) 错例深度挖掘与业务启示</h3>
+    <ul>
+      <li>对BadCase样本进行分析，归纳三类错误来源：分布外超长文本、数据集本身标签噪声、单文本内多维度情感互相冲突。</li>
+      <li>得到工程启示：粗粒度整句情感分类存在固有局限，复杂业务需要向属性级ABSA细粒度情感分析演进。</li>
+    </ul>
+
+    <!-- 核心量化成果 -->
+    <div class="info-card">
+      <h2>核心量化成果</h2>
+      <ul>
+        <li>Full全量数据集微调模型：测试集准确率 <span class="highlight-text">91.54%</span>，F1‑Score <span class="highlight-text">0.9129</span>，对反讽类复杂文本具备更强语义推理能力；</li>
+        <li>实现基座一次常驻，多LoRA适配器毫秒级热插拔，消除多模型对比场景重复加载权重带来的显存与IO开销；</li>
+        <li>搭建完整自动化消融实验流水线，支持数据集规模、PEFT架构、超参数网格搜索批量跑实验；</li>
+        <li>实现带格式容错的工业级评测链路，自动输出全套分类指标、错例样本，完成多维度实验对比分析。</li>
+      </ul>
+    </div>
+
+    <p><strong>交付产物：</strong>数据集预处理脚本、自动化消融实验流水线、LoRA/QLoRA/DoRA训练配置、单基座Adapter热插拔推理代码、异常容错评测模块、错例分析脚本、全套实验图表。</p>
+    <p><strong>技术栈：</strong>PyTorch、Transformers、Peft、LLaMA‑Factory、Llama3‑8B、LoRA、QLoRA、DoRA、scikit‑learn、matplotlib、YAML、subprocess自动化调度</p>
+
+    <!-- 代码仓库 & 项目说明 -->
+    <div class="info-card">
+      <h2>代码仓库 & 项目说明</h2>
+      <ul>
+        <li>
+          <strong>GitHub仓库：</strong>
+          <a href="https://github.com/Linsensn/llama3-sentiment-concurrent" target="_blank">github.com/Linsensn/llama3‑sentiment‑concurrent</a>
+        </li>
+      </ul>
+    </div>
+
+    <p class="block‑quote‑note"><strong>对岗位的匹配点：</strong>具备大模型PEFT微调、4bit量化消融实验经验；掌握单基座多Adapter热插拔推理优化；熟练编写自动化实验流水线、工业级评测容错链路；具备错例驱动的模型分析能力，匹配大模型训练、推理优化、LLM应用后端岗位。</p>
   </div>
 </details>
