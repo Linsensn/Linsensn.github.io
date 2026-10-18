@@ -56,7 +56,6 @@ author_profile: true
       </a>
     </div>
     
-    
     <h3>(2) YOLOv8‑Nano模型训练与ONNX轻量化导出</h3>
     <p>以YOLOv8‑Nano作为预训练基座，开启矩形训练，关闭mosaic、mixup等会扭曲书脊形态的数据增强；训练100个epoch，得到mAP50=0.978检测模型。通过ONNX执行常量折叠、Conv‑BN算子融合做模型简化；设计IoM嵌套过滤、透视坐标逆映射、多尺度预处理方案，解决密集书架场景的重复误检问题。
     模型训练在本地工作站i7‑13700H + RTX4060(8G)完成，云端2C4G服务器仅执行推理，做到训练与推理硬件分离。</p>
@@ -75,9 +74,10 @@ author_profile: true
       </a>
     </div>
 
-
     <h3>(3) PaddleOCR书脊识别数据集与模型微调</h3>
-    <p>使用YOLO检测输出裁剪得到真实书脊切片，构建书脊专属OCR识别数据集，采用SimpleDataSet格式组织样本；基于PP‑OCRv4‑rec‑student轻量权重做迁移微调，针对细长书脊场景调整输入尺寸、正则与增强策略，在验证集识别准确率达到0.906；完成Paddle静态推理图导出，剥离训练求导图，适配后端CPU推理部署。</p>
+    <p>使用YOLO检测输出裁剪得到真实书脊切片，构建书脊专属OCR识别数据集，采用SimpleDataSet格式组织样本；基于PP‑OCRv4‑rec‑student轻量蒸馏权重开展迁移微调。
+    针对细长书脊场景定制训练策略：设置输入张量[3,48,640]，配置5轮warmup预热、L2正则抑制过拟合，启用MultiScaleSampler多尺度采样；在Epoch74拿到全局最优权重，验证集识别准确率acc达到0.906，归一化编辑距离norm_edit_dis=0.990，单图推理fps约3.8。
+    训练完成后导出Paddle静态推理图，剥离训练反向传播求导逻辑，去除训练框架依赖，适配2C4G无GPU后端CPU推理部署。</p>
     <div class="project-gallery">
       <a href="/assets/images/bookway/ocr_dataset.png" data-lg-caption="书脊OCR识别数据集样本，包含反光、形变的真实书脊切片">
         <div class="img-wrap">
@@ -85,8 +85,14 @@ author_profile: true
           <p class="img-caption">书脊OCR识别数据集样本</p>
         </div>
       </a>
+      <a href="/assets/images/bookway/ocr_train_log.png" data-lg-caption="OCR模型训练日志，Epoch74取得最优识别精度">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/ocr_train_log.png" alt="OCR训练日志截图">
+          <p class="img-caption">OCR模型训练日志截图</p>
+        </div>
+      </a>
     </div>
-    
+
     <h3>(4) 三级检索状态机，处理OCR识别噪声</h3>
     <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
 
