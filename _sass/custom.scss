@@ -147,9 +147,13 @@ details.fold[open] > summary::before {
     background: #f7f9fa;
     padding: 1em;
     border-radius: 6px;
-    // margin: 1em 0;
+    margin: 1em 0;
 }
 .info-card h3 {
+    margin-top: 0;  /* 卡片内部h3消除上边距，避免卡片内留白过多 */
+    margin-bottom: 0.6em;
+}
+.info-card h2 {
     margin-top: 0;  /* 卡片内部h3消除上边距，避免卡片内留白过多 */
     margin-bottom: 0.6em;
 }
