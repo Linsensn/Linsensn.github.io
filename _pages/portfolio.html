@@ -20,9 +20,9 @@ author_profile: true
 <details class="fold" open>
   <summary>WebAR 轻量化实景追踪系统｜书途 BookWay</summary>
   <div>
-    <h3 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
+    <h3 style="margin-top:0.5em;">
       <span class="highlight-text">算法与技术总负责人 · 项目总规模10人（开发+质控共6人）</span>
-      <span style="font-weight: normal; color: #666;"><code>2025.09 - 2026.01</code></span>
+      <span style="font-weight: normal; color: #666; margin-left:0.8em;"><code>2025.09 - 2026.01</code></span>
     </h3>
 
     <!-- 项目演示视频 -->
@@ -46,13 +46,20 @@ author_profile: true
       <li>构建<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>三级检索状态机，处理OCR识别错字、形近字干扰。</li>
     </ul>
 
-    <div class="img-wrap">
-      <img src="/assets/images/bookway/yolo_curve.png" alt="YOLOv8‑Nano训练损失与精度收敛曲线">
-      <p class="img-caption">YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力</p>
-    </div>
-    <div class="img-wrap">
-      <img src="/assets/images/bookway/dataset_sample.png" alt="数据集标注样例">
-      <p class="img-caption">图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景</p>
+    <!-- ========== 画廊A：【算法模块专属】 ========== -->
+    <div class="project-gallery">
+      <a href="/assets/images/bookway/yolo_curve.png" data-lg-caption="YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/yolo_curve.png" alt="YOLOv8‑Nano训练损失与精度收敛曲线">
+          <p class="img-caption">YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力</p>
+        </div>
+      </a>
+      <a href="/assets/images/bookway/dataset_sample.png" data-lg-caption="图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/dataset_sample.png" alt="数据集标注样例">
+          <p class="img-caption">图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景</p>
+        </div>
+      </a>
     </div>
 
     <h2>2. 后端系统架构与业务实现</h2>
@@ -62,13 +69,20 @@ author_profile: true
       <li>设计完整业务异常体系：区分HTTP标准异常与1xxxx/3xxxx业务状态码，全局异常拦截；实现并发信号量限流，控制图像推理并发数，保护2C4G服务器。</li>
     </ul>
 
-    <div class="img-wrap">
-      <img src="/assets/images/bookway/arch.png" alt="系统整体逻辑架构图">
-      <p class="img-caption">系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块</p>
-    </div>
-    <div class="img-wrap">
-      <img src="/assets/images/bookway/search_seq.png" alt="三级检索引擎时序图">
-      <p class="img-caption">三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程</p>
+    <!-- ========== 画廊B：【后端模块专属】 ========== -->
+    <div class="project-gallery">
+      <a href="/assets/images/bookway/arch.png" data-lg-caption="系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/arch.png" alt="系统整体逻辑架构图">
+          <p class="img-caption">系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块</p>
+        </div>
+      </a>
+      <a href="/assets/images/bookway/search_seq.png" data-lg-caption="三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程">
+        <div class="img-wrap">
+          <img src="/assets/images/bookway/search_seq.png" alt="三级检索引擎时序图">
+          <p class="img-caption">三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程</p>
+        </div>
+      </a>
     </div>
 
     <h2>3. 工程化落地与团队研发管理</h2>
@@ -92,7 +106,7 @@ author_profile: true
 
     <p><strong>技术栈：</strong>YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、MySQL、Docker、Nginx、JWT</p>
 
-    <!-- 代码仓库 & 线上历史部署说明：复用同一个info-card，样式统一 -->
+    <!-- 代码仓库 & 线上历史部署说明：复用同一个info‑card，样式统一 -->
     <div class="info-card">
       <h2>代码仓库 & 线上历史部署说明</h2>
       <ul>
