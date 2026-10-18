@@ -75,7 +75,7 @@ redirect_from:
       <li><strong>团队管理：</strong>制定 Issue 驱动开发、Git 分支、PR 评审质控门禁，统一团队数据库迁移、接口定义、代码注释全套开发规范。</li>
       <li><strong>量化成果：</strong>模型 mAP50 达到 <span class="highlight-text">0.978</span>，实现<strong>纯 CPU 毫秒级推理</strong>；依靠缓存、异步限流策略保障高并发图像请求下系统<strong>零宕机</strong>；完成整套端到端 WebAR 业务闭环，容器化可直接部署上线。</li>
     </ul>
-    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>YOLOv8-Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、Docker、JWT · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/bookway" target="_blank">GitHub 源码</a> · <a href="https://gitee.com/bookway-studio/bookway" target="_blank">Gitee 源码</a></p>
+    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、MySQL、Docker、Nginx、JWT · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/bookway" target="_blank">GitHub 源码</a> · <a href="https://gitee.com/bookway-studio/bookway" target="_blank">Gitee 源码</a></p>
 
     <br>
 

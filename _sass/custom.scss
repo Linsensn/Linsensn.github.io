@@ -118,16 +118,20 @@ details.fold[open] > summary::before {
 
 /* 图片说明注释：图片容器+底部小字说明 */
 .img-wrap {
-    margin: 0.8em 0;
+  margin: 1.4rem auto;
+  text-align: center; /* 图片 + 图注全部居中 */
 }
 .img-wrap img {
-    width: 100%;
-    max-width: 720px;
+  max-width: 80%;
+  max-height: 520px; /* 限制图片最大高度 */
+  object-fit: contain; /* 不变形，完整显示原图 */
+  border-radius: 8px;
 }
-.img-wrap .img-caption {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 0.4em;
+.img-caption {
+  margin-top: 0.75rem; /* 拉开图片与文字的间距 */
+  font-size: 0.92rem;
+  color: #555;
+  text-align: center; /* 图注文字强制居中 */
 }
 
 /* 引用/提示块：左侧粗边线块 */
@@ -146,6 +150,10 @@ details.fold[open] > summary::before {
     margin: 1em 0;
 }
 .info-card h3 {
+    margin-top: 0;  /* 卡片内部h3消除上边距，避免卡片内留白过多 */
+    margin-bottom: 0.6em;
+}
+.info-card h2 {
     margin-top: 0;  /* 卡片内部h3消除上边距，避免卡片内留白过多 */
     margin-bottom: 0.6em;
 }
@@ -185,7 +193,6 @@ details.fold[open] > summary::before {
     right: 0;
     bottom: 0;
     padding: 2.2rem 1rem 1rem;
-    /* 从上到下黑色半透明渐变 */
     background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
     color:#ffffff;
 }
@@ -199,3 +206,13 @@ details.fold[open] > summary::before {
     opacity:0.95;
 }
 
+/* ========= 图片画廊组件样式 ========= */
+.project-gallery {
+  margin: 1.2rem 0;
+}
+.project-gallery a {
+  /* 清除a标签默认蓝色、下划线 */
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
