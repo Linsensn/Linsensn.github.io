@@ -14,3 +14,30 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/main.css">
+
+<!-- LightGallery 图片灯箱画廊 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/download/lg-download.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // 只对class=project‑gallery的容器启用画廊
+  document.querySelectorAll('.project-gallery').forEach((el) => {
+    lightGallery(el, {
+      plugins: [lgZoom, lgThumbnail, lgFullscreen, lgDownload],
+      download: true,        // 开启下载按钮
+      thumbnail: true,       // 底部缩略图条
+      showThumbnailByDefault:true,
+      zoom: true,            // 滚轮缩放
+      fullScreen: true,
+      keyPress: true,         // 键盘方向键翻页、ESC关闭
+      counter: true,          // 显示 1 / 4 图片计数
+      slideShowAutoplay: false
+    });
+  })
+})
+</script>
