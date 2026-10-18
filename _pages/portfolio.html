@@ -94,16 +94,13 @@ author_profile: true
     </div>
 
     <h3>(4) 三级检索状态机，处理OCR识别噪声</h3>
-    <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
-
+    <p>针对OCR输出存在错字、形近字识别偏差问题，构建三级检索链路：<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>。
+    在Levenshtein编辑距离中针对OCR常见形近字（0/O、1/l等）做替换代价降权；大模型纠错识别出新书名后，写入<code>PendingBook</code>待确认隔离库；当同一书籍累计扫描达到5次触发自动晋升，迁移至正式图书库。层层过滤识别噪声，提升在书脊识别出错情况下的书籍检索成功率。</p>
+    
     <h2>2. 后端系统架构与业务实现</h2>
-    <ul>
-      <li>搭建FastAPI分层架构：路由层‑业务层‑CRUD‑ORM模型‑Schema契约层；采用Code‑First模式，SQLAlchemy+Alembic管理数据库迁移，禁止手写DDL。</li>
-      <li>Redis实现轨迹缓存屏障，基于track_id做会话缓存，配置TTL过期、LRU内存淘汰，减少重复推理计算；实现SSE流式推送识别结果给前端WebAR。</li>
-      <li>设计完整业务异常体系：区分HTTP标准异常与1xxxx/3xxxx业务状态码，全局异常拦截；实现并发信号量限流，控制图像推理并发数，保护2C4G服务器。</li>
-    </ul>
-
-    <!-- ========== 画廊B：【后端模块专属】 ========== -->
+    
+    <h3>(1) FastAPI分层架构与Code‑First数据库设计</h3>
+    <p>搭建路由层‑业务层‑CRUD‑ORM模型‑Schema契约层完整分层架构；采用Code‑First开发模式，基于SQLAlchemy定义数据模型，配合Alembic完成数据库版本迁移，禁止手写DDL建表语句；封装全局依赖注入，自动管理数据库会话生命周期，请求结束自动归还连接池，避免连接泄露。</p>
     <div class="project-gallery">
       <a href="/assets/images/bookway/arch.png" data-lg-caption="系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块">
         <div class="img-wrap">
@@ -111,6 +108,14 @@ author_profile: true
           <p class="img-caption">系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块</p>
         </div>
       </a>
+    </div>
+    
+    <h3>(2) Redis轨迹缓存与SSE流式推送</h3>
+    <p>基于<code>track_id</code>实现WebAR连续帧轨迹会话缓存，设置TTL=300s缓存过期，Redis配置maxmemory=512MB与allkeys‑lru内存淘汰策略；实现缓存动态击穿逻辑：仅当新帧OCR置信度、文本质量显著提升才重新执行全链路推理，避免重复算力消耗；采用SSE Server‑Sent‑Events长流式协议，将YOLO检测、OCR识别结果逐块实时推送给前端WebAR，降低交互延迟。</p>
+    
+    <h3>(3) 全局异常体系、业务错误码与并发限流防护</h3>
+    <p>搭建完整的异常拦截防护体系，区分HTTP协议异常与自定义业务错误码，视觉类异常使用<code>1xxxx</code>区间，资源限流类异常使用<code>3xxxx</code>区间；全局拦截器捕获各类异常，脱敏后返回标准化JSON响应，不向外暴露底层堆栈信息；实现并发信号量限流，对图像推理任务做并发管控，在腾讯云2C4G无GPU轻量服务器硬件约束下，防止CPU、内存被打满触发OOM。</p>
+    <div class="project-gallery">
       <a href="/assets/images/bookway/search_seq.png" data-lg-caption="三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程">
         <div class="img-wrap">
           <img src="/assets/images/bookway/search_seq.png" alt="三级检索引擎时序图">
