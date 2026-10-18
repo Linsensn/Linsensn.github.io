@@ -64,9 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
       fullScreen: true,
       keyPress: true,
       counter: true,
-      slideShowAutoplay: false, // 默认关闭自动播放，访客点按钮才开启
-      slideShowInterval:4000, //开启后4秒切一张
-      autoplayControls:true //显示工具栏自动播放按钮
+      slideShowAutoplay: false,
+      slideShowInterval:4000,
+      autoplayControls:true,
+      // 新增：关闭按钮配置，解决没有叉号无法退出
+      closable: true,
+      showCloseButton: true
     });
   })
 })
