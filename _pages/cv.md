@@ -90,7 +90,7 @@ redirect_from:
       <li><strong>多模态解析与交互：</strong>开发多模态解析中间件，通过 OpenCV 自适应切片、PyMuPDF/antiword、PaddleOCR 降级兜底兼容图片/PDF/Word 素材；封装异步客户端实现 <strong>DeepSeek/GLM 多模型动态路由</strong>，结合 Pydantic 强校验、<strong>SSE 流式响应</strong>与会话持久化保障交互。</li>
       <li><strong>量化成果：</strong>完成整套 Agent 后端底座，支持多格式学习素材上传解析、流式 AI 问答、自动生成测验题库；实现学生会话树形管理、管理员批量管控，解决多模型调用、异构文档解析的工程痛点，容器化交付完整业务后端。</li>
     </ul>
-    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>FastAPI、Alembic、JWT、OpenCV、PaddleOCR、DeepSeek、GLM、Pydantic、SSE、Docker · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/LiteKnow" target="_blank">GitHub 源码</a></p>
+    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>FastAPI、SQLAlchemy、Alembic、JWT、Pydantic、OpenCV、PaddleOCR、PyMuPDF、DeepSeek、GLM、LangChain、SSE、Docker、MySQL · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/LiteKnow" target="_blank">GitHub 源码</a></p>
 
     <br>
 
