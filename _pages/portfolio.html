@@ -20,66 +20,67 @@ author_profile: true
 <details class="fold" open>
   <summary>WebAR 轻量化实景追踪系统｜书途 BookWay</summary>
   <div>
-    <h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em; border-left: 4px solid #ccc; padding-left: 1em; color: #666;  margin-bottom: 1.5em;">
+    <h2 style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.5em;">
       <span class="highlight-text">算法与技术总负责人 · 项目总规模10人（开发+质控共6人）</span>
       <span style="font-weight: normal; color: #666;"><code>2025.09 - 2026.01</code></span>
     </h2>
 
-    <div style="margin:1em 0;">
-      <h3><i class="fas fa-video"></i> 项目演示视频</h3>
-      <video controls muted style="width:100%; max-width:860px; border-radius:6px;">
+    <!-- 项目演示视频 -->
+    <div class="video-wrap">
+      <h3>项目演示视频</h3>
+      <video controls muted>
         <source src="/assets/videos/bookway_demo.mp4" type="video/mp4">
         你的浏览器不支持视频播放，请访问仓库查看演示。
       </video>
-      <p style="color:#666;">演示：移动端浏览器扫码直接使用WebAR，完成书脊识别、检索、实景导航，无需安装App</p>
+      <p class="video-caption">演示：移动端浏览器扫码直接使用WebAR，完成书脊识别、检索、实景导航，无需安装App</p>
     </div>
 
     <p><strong>项目背景：</strong>解决高校图书馆“知道书名，找不到实体书籍”痛点；系统部署于<strong>腾讯云2C4G无GPU</strong>轻量服务器，硬件资源极度受限。作为项目算法与技术总负责人，在10人整体项目（开发部4人，开发+质控合计6人）中，主导完成整套WebAR智能图书导引系统，Android浏览器直接访问即可实现书脊目标检测、OCR文本识别、三级检索、AR实景导航全链路闭环。</p>
 
     <p><strong>我的职责：</strong>负责计算机视觉算法方案设计、FastAPI后端整体架构设计；制定数据库、接口、代码注释规范；主导Issue‑PR驱动开发流程，负责代码评审与版本合并，完成容器化生产环境交付。</p>
 
-    <h3><i class="fas fa-brain"></i> 1. 计算机视觉算法实现</h3>
+    <h3>1. 计算机视觉算法实现</h3>
     <ul>
       <li>自建图书馆实景数据集，完成书脊目标检测、OCR识别数据采集、标注与清洗；针对密集书架、大透视畸变、逆光阴影做场景覆盖；严格执行标注质量管控策略。</li>
       <li>基于YOLOv8‑Nano完成迁移训练；通过ONNX做常量折叠、Conv‑BN算子融合模型轻量化；设计IoM嵌套过滤、透视坐标逆映射、多尺度预处理解决密集场景误检。</li>
       <li>构建<strong>SQL精确匹配 → Levenshtein加权模糊纠错 → LLM混元1.8B语义确认</strong>三级检索状态机，处理OCR识别错字、形近字干扰。</li>
     </ul>
-    <!-- 算法模块配套图片：训练收敛曲线 -->
-    <div style="margin:0.8em 0;">
-      <img src="/assets/images/bookway/yolo_curve.png" alt="YOLOv8‑Nano训练损失与精度收敛曲线" style="width:100%;max-width:720px;">
-      <p style="font-size:0.9em; color:#666;">YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力</p>
+
+    <div class="img-wrap">
+      <img src="/assets/images/bookway/yolo_curve.png" alt="YOLOv8‑Nano训练损失与精度收敛曲线">
+      <p class="img-caption">YOLOv8‑Nano训练损失、mAP精度收敛曲线，验证模型泛化能力</p>
     </div>
-    <div style="margin:0.8em 0;">
-      <img src="/assets/images/bookway/dataset_sample.png" alt="数据集标注样例" style="width:100%;max-width:720px;">
-      <p style="font-size:0.9em; color:#666;">图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景</p>
+    <div class="img-wrap">
+      <img src="/assets/images/bookway/dataset_sample.png" alt="数据集标注样例">
+      <p class="img-caption">图书馆书脊数据集标注可视化样例，覆盖倾斜、密集挤压等真实场景</p>
     </div>
 
-    <h3><i class="fas fa-cogs"></i> 2. 后端系统架构与业务实现</h3>
+    <h3>2. 后端系统架构与业务实现</h3>
     <ul>
       <li>搭建FastAPI分层架构：路由层‑业务层‑CRUD‑ORM模型‑Schema契约层；采用Code‑First模式，SQLAlchemy+Alembic管理数据库迁移，禁止手写DDL。</li>
       <li>Redis实现轨迹缓存屏障，基于track_id做会话缓存，配置TTL过期、LRU内存淘汰，减少重复推理计算；实现SSE流式推送识别结果给前端WebAR。</li>
       <li>设计完整业务异常体系：区分HTTP标准异常与1xxxx/3xxxx业务状态码，全局异常拦截；实现并发信号量限流，控制图像推理并发数，保护2C4G服务器。</li>
     </ul>
-    <!-- 架构+时序图 -->
-    <div style="margin:0.8em 0;">
-      <img src="/assets/images/bookway/arch.png" alt="系统整体逻辑架构图" style="width:100%;max-width:720px;">
-      <p style="font-size:0.9em; color:#666;">系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块</p>
+
+    <div class="img-wrap">
+      <img src="/assets/images/bookway/arch.png" alt="系统整体逻辑架构图">
+      <p class="img-caption">系统分层逻辑架构视图，包含视觉模块、检索中枢、存储、运维监控模块</p>
     </div>
-    <div style="margin:0.8em 0;">
-      <img src="/assets/images/bookway/search_seq.png" alt="三级检索引擎时序图" style="width:100%;max-width:720px;">
-      <p style="font-size:0.9em; color:#666;">三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程</p>
+    <div class="img-wrap">
+      <img src="/assets/images/bookway/search_seq.png" alt="三级检索引擎时序图">
+      <p class="img-caption">三级检索状态机完整业务时序，包含Redis缓存拦截、数据库查询、大模型语义纠错流程</p>
     </div>
 
-    <h3><i class="fas fa-tools"></i> 3. 工程化落地与团队研发管理</h3>
+    <h3>3. 工程化落地与团队研发管理</h3>
     <ul>
       <li>Docker Compose容器编排；应用Lifespan事件实现模型预加载，搭配健康探针、容器重启自愈策略，规避冷启动OOM内存溢出；配置Swap交换分区应对内存峰值。</li>
       <li>推行Issue驱动开发：定义分支命名规范、commit规范、PR评审‑QC真机验收门禁；统一VSCode代码片段模板，强制文件头与函数docstring注释，适配软件著作权申请。</li>
       <li>制定完整开发、联调、质控验收流程：SSH隧道连接共享云端数据库，容器化本地测试，Apifox接口契约测试，日志审计。</li>
     </ul>
 
-    <!-- 核心量化成果块 -->
-    <div style="background:#f7f9fa; padding:1em; border-radius:6px;margin:1em 0;">
-      <h3><i class="fas fa-bar-chart"></i> 核心量化成果</h3>
+    <!-- 核心量化成果：复用info-card -->
+    <div class="info-card">
+      <h3>核心量化成果</h3>
       <ul>
         <li>YOLOv8‑Nano模型 mAP50 = <span class="highlight-text">0.978</span>，纯CPU环境实现毫秒级推理；</li>
         <li>Redis缓存+异步限流策略，高并发图像请求下系统<span class="highlight-text">零宕机</span>，适配2C4G资源上限；</li>
@@ -91,9 +92,9 @@ author_profile: true
 
     <p><strong>技术栈：</strong>YOLOv8‑Nano、ONNX、PaddleOCR、FastAPI、SQLAlchemy、Alembic、Redis、MySQL、Docker、Nginx、JWT</p>
 
-    <!-- 代码仓库 & 线上历史部署说明 -->
-    <div style="background:#f7f9fa;padding:1em;border-radius:6px;margin:1em 0;">
-      <h3><i class="fas fa-folder-open"></i> 代码仓库 & 线上历史部署说明</h3>
+    <!-- 代码仓库 & 线上历史部署说明：复用同一个info-card，样式统一 -->
+    <div class="info-card">
+      <h3>代码仓库 & 线上历史部署说明</h3>
       <ul>
         <li>
           <strong>Gitee（真实项目研发主仓库）：</strong>
@@ -113,10 +114,9 @@ author_profile: true
       </ul>
     </div>
 
-    <p style="color:#666; font-size:0.95em;"><strong>对岗位的匹配点：</strong>具备受限硬件下AI模型优化经验；FastAPI异步高并发后端、数据库ORM迁移、业务错误码体系工程实践；在10人项目中负责技术总负责人，主导6人开发质控小组研发流程、PR代码评审、容器化生产落地经验，匹配AI推理服务、后端开发岗位。</p>
+    <p class="block-quote-note"><strong>对岗位的匹配点：</strong>具备受限硬件下AI模型优化经验；FastAPI异步高并发后端、数据库ORM迁移、业务错误码体系工程实践；在10人项目中负责技术总负责人，主导6人开发质控小组研发流程、PR代码评审、容器化生产落地经验，匹配AI推理服务、后端开发岗位。</p>
   </div>
 </details>
-
 
 <br>
 
