@@ -47,6 +47,13 @@ redirect_from:
   
 > 以下为项目概览，完整技术细节、量化指标、项目演示请跳转项目页面查看：[项目经历](/portfolio/)
 
+<details class="fold">
+<summary>项目经历｜快速索引概览</summary>
+  
+<div markdown="1">
+  
+> 以下为项目概览，完整技术细节、量化指标、项目演示请点击标题跳转至对应项目详情：
+
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>WebAR轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2025.09‑2026.01</code></span>
@@ -70,6 +77,22 @@ redirect_from:
 
 针对复杂情感文本分析场景，基于 Llama3-8B 构建大模型量化微调与多模型交叉验证评测系统。<br>
 **技术栈：PyTorch、matplotlib、LLaMA‑Factory、Llama‑3、4‑bit量化、DoRA、LoRA、QLoRA、Adapter热插拔、大模型并发评测、YAML、scikit‑learn、subprocess自动化调度** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/llama3-sentiment-concurrent)
+
+<h2 style="display: flex; justify-content: space-between; align-items: baseline;">
+  <span>Z世代场景化智慧健康管理平台｜问生Ways（挑战杯）｜开发部负责人</span>
+  <span style="font-weight: normal; color: #666;"><code>2025.10‑2025.12</code></span>
+</h2>
+
+挑战杯参赛项目，面向大学生群体，基于药食同源中医体质理论实现体质测评、场景化健康推荐知识库。<br>
+**技术栈：Java、SpringBoot、SpringSecurity、JWT、MyBatis、MySQL、阿里云ECS/RDS、Maven** · <i class="fab fa-github"></i> [Gitee 源码](https://gitee.com/LXRDL/Wen‑Sheng‑Online‑Platform) · [线上站点](https://wenshengways.xyz)
+
+<h2 style="display: flex; justify-content: space-between; align-items: baseline;">
+  <span>电影在线购票系统｜独立开发</span>
+  <span style="font-weight: normal; color: #666;"><code>2025.08‑2025.10</code></span>
+</h2>
+
+SpringBoot+MySQL+Redis实现电影购票平台；自主实现乐观锁+Redis分布式锁+异步队列三级防超卖，Jmeter高并发压测验证。<br>
+**技术栈：Java、SpringBoot、MyBatis‑Plus、MySQL、Redis、JWT、BCrypt、Vue2、Jmeter** · <i class="fab fa-github"></i> [Gitee 源码](https://gitee.com/LXRDL/Movie‑Ticket‑Booking‑System)
 
 </div>
 </details>
