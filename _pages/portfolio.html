@@ -613,3 +613,180 @@ author_profile: true
     <p class="block-quote-note"><strong>对岗位的匹配点：</strong>具备Java‑SpringBoot企业级后端开发、HTML前端开发、JWT权限体系、MySQL数据建模、MyBatis开发、云服务器上线部署经验；拥有跨学科大型团队开发部负责人经历，能够输出接口文档、制定团队开发规范，匹配Java后端、全栈开发岗位。</p>
   </div>
 </details>
+
+<!-- ===== 项目四 ===== -->
+<details class="fold">
+  <summary>电影在线购票系统</summary>
+  <div>
+    <h3 style="margin-top:0.5em;">
+      <span class="highlight-text">独立开发 · 课程设计项目</span>
+      <span style="font-weight: normal; color: #666; margin-left:0.8em;"><code>2025.08 - 2025.10</code></span>
+    </h3>
+    <p><strong>项目背景：</strong>数据库系统原理课程独立完成设计与开发，参考B站教程学习基础框架，<strong>自主扩展实现高并发选座核心能力</strong>。针对传统线下影院购票排队、座位超售、信息不透明痛点，实现一套前后端分离电影购票平台，支持用户浏览影片、多条件筛选、可视化选座下单、模拟支付、影院/管理员后台管理；重点解决热门场次高并发下座位超卖问题，完成Jmeter并发压测验证。本项目无线上部署站点，全部功能本地完成验证。</p>
+    <p><strong>我的职责：</strong>项目<strong>全部独立实现</strong>；完成完整需求分析、E‑R实体关系建模、数据库表设计、索引/触发器/存储过程设计；基于SpringBoot+MyBatis‑Plus开发后端业务；实现JWT+验证码身份权限体系；自主设计<strong>乐观锁 + Redis分布式锁 + 异步任务队列</strong>三级并发控制方案，解决选座超卖；编写Jmeter压测脚本完成高并发验证；对接Vue前端，完成接口联调。</p>
+
+    <h2>1. 数据库完整设计与性能优化</h2>
+    <h3>(1) 需求分析、E‑R实体建模</h3>
+    <ul>
+      <li>完成完整业务需求调研，识别用户、影院、电影、影厅、场次、座位、订单、支付记录核心业务实体，梳理一对多、多对多实体关联关系。</li>
+      <li>设计完整E‑R图，规范主键、外键约束，遵循第三范式；针对高频查询场景适度做反范式优化，空间换时间提升查询速度。</li>
+      <li>梳理完整顶层、一层、二层业务数据流，划分用户、影院、管理员三方角色，明确各角色输入输出与业务边界。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/movie_ticket/er_diagram.png" data-lg-caption="系统E‑R实体关系图，包含用户、电影、场次、座位、订单全部实体与关联">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/er_diagram.png" alt="系统E‑R实体关系图">
+          <p class="img-caption">系统E‑R实体关系图</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) 表结构、索引、触发器、存储过程、视图设计</h3>
+    <ul>
+      <li>设计用户、影院、电影、影厅、场次、座位、订单、支付记录、选座任务队列表；定义主键、外键、check字段约束，保障实体完整性、参照完整性、业务自定义完整性。</li>
+      <li>针对电影筛选、场次查询、座位高并发读写场景，建立<strong>复合索引、普通索引</strong>，优化多条件联合查询性能。</li>
+      <li>编写数据库触发器：自动更新场次可用座位数量、订单‑支付状态联动、票房统计自动更新；编写存储过程批量维护场次状态；构建热映电影、即将上映电影物化视图简化业务查询。</li>
+    </ul>
+
+    <h2>2. 后端整体架构与身份权限体系</h2>
+    <h3>(1) 前后端分离分层架构</h3>
+    <ul>
+      <li>采用<strong>Controller‑Service‑Mapper三层分层架构</strong>，基于SpringBoot + MyBatis‑Plus实现，API网关统一做参数校验、鉴权拦截。</li>
+      <li>划分三类角色：普通用户、影院管理员、平台超级管理员，不同角色隔离接口访问权限。</li>
+      <li>统一全局异常捕获，封装标准化JSON返回体，屏蔽数据库、服务层原始堆栈对外输出。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/movie_ticket/arch_overview.png" data-lg-caption="系统总体架构图：Vue前端、API网关、业务层、MySQL+Redis存储层">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/arch_overview.png" alt="系统总体架构图">
+          <p class="img-caption">系统总体架构图</p>
+        </div>
+      </a>
+      <a href="/assets/images/movie_ticket/module_tree.png" data-lg-caption="系统功能模块结构图，划分前台用户、影院后台、平台管理员后台">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/module_tree.png" alt="系统功能模块结构图">
+          <p class="img-caption">系统功能模块结构图</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) JWT + 验证码身份认证</h3>
+    <ul>
+      <li>BCrypt加密存储用户密码；登录增加图形验证码防护暴力破解；登录成功下发JWT无状态令牌。</li>
+      <li>自定义拦截器校验JWT令牌，解析用户身份与角色，拦截未登录、越权访问请求。</li>
+    </ul>
+      <a href="/assets/images/movie_ticket/login_ui.png" data-lg-caption="登录页面效果图，账号密码图形验证码表单校验">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/login_ui.png" alt="登录页面效果图">
+          <p class="img-caption">登录页面效果图</p>
+        </div>
+      </a>
+    </div>
+
+    <h2>3. 核心业务：高并发可视化选座下单（自主扩展重点）</h2>
+    <h3>(1) 三级并发防超卖方案设计</h3>
+    <ul>
+      <li><strong>MySQL乐观锁</strong>：seat表增加version版本号，更新座位时校验版本，版本冲突直接拒绝更新。</li>
+      <li><strong>Redis细粒度分布式锁</strong>：针对{sessionId}:{seatId}座位粒度上锁，隔离不同座位争抢。</li>
+      <li><strong>异步任务队列</strong>：并发冲突请求送入任务队列排队消费；前端轮询查询任务执行结果；超时未支付自动释放座位。</li>
+      <li>完成Jmeter高并发压测，模拟热门场次大量选座请求，验证业务<strong>零座位超卖</strong>。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/movie_ticket/seat_flow.png" data-lg-caption="可视化选座完整业务流程图：缓存查询‑分布式锁‑乐观锁‑队列‑轮询‑订单生成">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/seat_flow.png" alt="可视化选座业务流程图">
+          <p class="img-caption">可视化选座业务流程图</p>
+        </div>
+      </a>
+      <a href="/assets/images/movie_ticket/seat_ui.png" data-lg-caption="可视化选座界面效果图，颜色区分可用/已锁定/已售座位状态">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/seat_ui.png" alt="可视化选座界面效果图">
+          <p class="img-caption">可视化选座界面效果图</p>
+        </div>
+      </a>
+      <a href="/assets/images/movie_ticket/jmeter_test.png" data-lg-caption="Jmeter高并发压测结果，验证座位不会出现超卖">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/jmeter_test.png" alt="Jmeter高并发压测结果">
+          <p class="img-caption">Jmeter高并发压测结果</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) 订单与支付状态联动业务</h3>
+    <ul>
+      <li>选座锁定成功生成待支付订单；模拟支付完成，通过触发器联动更新订单、支付、座位状态。</li>
+      <li>超时未支付自动释放座位，回写Redis缓存与MySQL数据库；支持订单查看、退票业务逻辑。</li>
+    </ul>
+
+    <h2>4. 其余业务模块实现</h2>
+    <h3>(1) 电影多条件检索、榜单功能</h3>
+    <ul>
+      <li>支持电影名称、类型、地区、上映时间多条件组合筛选；实现热播榜、票房榜、评分榜。</li>
+      <li>MyBatis动态SQL组装查询条件；依托数据库视图聚合统计榜单数据，分页返回前端。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/movie_ticket/movie_list_ui.png" data-lg-caption="电影列表页面效果图，筛选条件、热播榜单展示">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/movie_list_ui.png" alt="电影列表页面效果图">
+          <p class="img-caption">电影列表页面效果图</p>
+        </div>
+      </a>
+      <a href="/assets/images/movie_ticket/movie_detail_ui.png" data-lg-caption="电影详情页，展示影片信息、对应放映场次列表">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/movie_detail_ui.png" alt="电影详情页效果图">
+          <p class="img-caption">电影详情页效果图</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) 多角色后台管理功能</h3>
+    <ul>
+      <li>影院后台：影厅管理、排片管理、本影院订单查看；</li>
+      <li>系统级管理员后台：电影、演职人员、影院资质审核、全平台订单、用户管理、运营统计仪表盘。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/movie_ticket/admin_dash_ui.png" data-lg-caption="影院管理员后台仪表盘，展示票房订单统计数据">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/admin_dash_ui.png" alt="影院管理员后台仪表盘">
+          <p class="img-caption">影院管理员后台仪表盘</p>
+        </div>
+      </a>
+      <a href="/assets/images/movie_ticket/movie_manage_ui.png" data-lg-caption="站内所有电影系统级管理界面效果图">
+        <div class="img-wrap">
+          <img src="/assets/images/movie_ticket/movie_manage_ui.png" alt="站内所有电影系统级管理界面">
+          <p class="img-caption">站内所有电影系统级管理界面</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 核心量化成果 -->
+    <div class="info-card">
+      <h2>核心量化成果</h2>
+      <ul>
+        <li>完整完成数据库全流程设计：E‑R建模、表、复合索引、触发器、存储过程、业务视图，兼顾数据完整性与查询性能；</li>
+        <li>自主实现<strong>乐观锁 + Redis分布式锁 + 异步队列</strong>三级并发控制，Jmeter压测保证热门场次选座<strong>零超卖</strong>；</li>
+        <li>实现JWT+图形验证码权限体系，区分普通用户‑影院‑管理员三类角色，接口鉴权与越权拦截；</li>
+        <li>完整实现用户购票全链路：浏览电影‑筛选‑查看场次‑可视化选座‑下单‑模拟支付‑订单管理；支持双端后台管理。</li>
+      </ul>
+    </div>
+
+    <p><strong>交付产物：</strong>SpringBoot后端完整源码、MyBatis‑Plus Mapper脚本、数据库DDL脚本、Jmeter压测脚本、课程设计完整报告文档。</p>
+    <p><strong>技术栈：</strong>Java、SpringBoot、MyBatis‑Plus、MySQL、Redis、JWT、BCrypt、Vue2、Jmeter</p>
+
+    <!-- 代码仓库 & 项目说明 -->
+    <div class="info-card">
+      <h2>代码仓库 & 项目说明</h2>
+      <ul>
+        <li>
+          <strong>Github 仓库：</strong>
+          <a href="https://gitee.com/LXRDL/Wen-Sheng-Online-Platform" target="_blank">gitee.com/LXRDL/Wen-Sheng-Online-Platform</a>
+        </li>
+        <li>
+          <strong>项目说明：</strong>数据库课程设计独立开发项目；基础框架参考B站学习教程，<strong>高并发选座整套防超卖逻辑、触发器、存储过程、压测验证为自主设计实现</strong>；无线上部署环境，全部功能本地验证。
+        </li>
+      </ul>
+    </div>
+
+    <p class="block-quote-note"><strong>对岗位的匹配点：</strong>具备MySQL数据库完整设计能力，熟悉索引、触发器、存储过程、视图；掌握Redis分布式锁、乐观锁解决高并发资源争抢；熟悉SpringBoot分层后端、JWT鉴权；有Jmeter并发压测实践，匹配Java后端、后端开发岗位。</p>
+  </div>
+</details>
