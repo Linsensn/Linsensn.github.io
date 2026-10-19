@@ -495,3 +495,119 @@ author_profile: true
     <p class="block‑quote‑note"><strong>对岗位的匹配点：</strong>具备大模型PEFT微调、4bit量化消融实验经验；掌握单基座多Adapter热插拔推理优化；熟练编写自动化实验流水线、工业级评测容错链路；具备错例驱动的模型分析能力，匹配大模型训练、推理优化、LLM应用后端岗位。</p>
   </div>
 </details>
+
+<!-- ===== 项目四 ===== -->
+<details class="fold" open>
+  <summary>问生Ways｜Z世代场景化智慧健康管理平台（挑战杯）</summary>
+  <div>
+    <h3 style="margin-top:0.5em;">
+      <span class="highlight-text">开发部负责人 · 项目总规模14人</span>
+      <span style="font-weight: normal; color: #666; margin-left:0.8em;"><code>2025.10 - 2025.12</code></span>
+    </h3>
+    <p><strong>项目背景：</strong>挑战杯参赛项目，面向当代大学生高压学习生活场景，打造基于<strong>药食同源中医体质理论</strong>的场景化健康管理平台。针对市面健康APP泛化、缺少针对大学生备考/熬夜等细分场景的痛点，实现体质测评、场景化养生方案推荐、药食同源知识库；项目已上线域名 <code>wenshengways.xyz</code>。<strong>本人担任后端技术负责人，负责整体后端架构设计、核心业务编码、数据库建模、服务器部署与团队技术规约制定；前端由团队其他同学完成。</strong></p>
+    <p><strong>我的职责：</strong>主导SpringBoot后端整体架构设计；完成MySQL知识库、用户业务数据表建模；实现JWT身份认证、权限控制；开发体质测评规则引擎、药食同源知识库查询模块；完成阿里云ECS+RDS服务器上线部署；制定Git协作规范，完成代码评审，保障14人跨学科团队后端协同开发。</p>
+
+    <h2>1. SpringBoot后端架构与基础设施建设</h2>
+    <h3>(1) 前后端分离分层架构设计</h3>
+    <ul>
+      <li>搭建SpringBoot分层后端：控制器Controller‑业务Service‑DAO‑MyBatis数据访问层，完成RESTful API接口封装，为Flutter移动端、Web管理后台提供统一接口服务。</li>
+      <li>引入SpringSecurity + JWT实现无状态登录鉴权，封装接口权限拦截，区分普通学生用户、后台管理员角色。</li>
+      <li>统一全局异常捕获，封装标准化返回体，屏蔽服务器内部堆栈信息对外输出。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/wensheng/arch.png" data-lg-caption="问生Ways系统总体技术架构图，包含客户端、后端服务、云基础设施">
+        <div class="img-wrap">
+          <img src="/assets/images/wensheng/arch.png" alt="系统总体技术架构图">
+          <p class="img-caption">系统总体技术架构图</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(2) 数据库建模与药食同源知识库构建</h3>
+    <ul>
+      <li>设计MySQL数据库模型：用户表、体质测评问卷表、九种体质定义表、场景表、食材药材知识库表，完成106种药食同源食材结构化入库。</li>
+      <li>基于MyBatis编写复杂关联查询Mapper，实现体质条件、场景标签多条件联合检索，支撑推荐引擎数据查询需求。</li>
+      <li>设计数据库约束，完成基础种子数据初始化，保证开发环境数据库可一键初始化。</li>
+    </ul>
+    <div class="project-gallery">
+      <a href="/assets/images/wensheng/db_model.png" data-lg-caption="药食同源知识库数据库截图，存储食材性味、归经、功效、适用体质">
+        <div class="img-wrap">
+          <img src="/assets/images/wensheng/db_model.png" alt="知识库数据库截图">
+          <p class="img-caption">药食同源知识库数据库截图</p>
+        </div>
+      </a>
+    </div>
+
+    <h3>(3) 云服务器部署与团队开发规约</h3>
+    <ul>
+      <li>使用阿里云ECS云服务器 + RDS云数据库完成项目上线部署，域名 <code>wenshengways.xyz</code> 对外可访问。</li>
+      <li>制定Git分支、Commit提交规范，组织后端小组代码评审，保障计算机、药学、商科跨学科团队协同。</li>
+      <li>输出后端接口文档，供前端Flutter开发同学对接调试，降低前后端联调沟通成本。</li>
+    </ul>
+
+    <h2>2. 核心业务模块开发（规则驱动MVP）</h2>
+    <h3>(1) 中医九型体质测评规则引擎</h3>
+    <ul>
+      <li>对接国标中医体质判定问卷，后端实现问卷得分统计规则引擎，根据用户答题结果计算判定用户所属体质类型。</li>
+      <li>保存用户体质测评档案，支持多次测评历史记录，为后续方案推荐提供用户画像输入。</li>
+    </ul>
+
+    <h3>(2) 场景化健康方案推荐引擎V1.0（规则版）</h3>
+    <ul>
+      <li>实现<strong>体质+场景</strong>双维度规则匹配：例如“熬夜恢复”“期末备考”场景，结合用户体质，从知识库匹配饮食、起居、运动多维度调理建议。</li>
+      <li>后端完成业务规则逻辑，不依赖大模型，以规则系统完成MVP产品快速验证商业假设，为后续迭代AI版本预留业务扩展接口。</li>
+    </ul>
+
+    <h3>(3) 药食同源知识库查询服务</h3>
+    <ul>
+      <li>提供食材、药材百科查询接口，支持按功效、适用体质筛选，Web/APP端展示食材性味归经、食疗宜忌科普内容。</li>
+      <li>做参数合法性校验，防越权、防非法参数注入，保障知识库接口安全访问。</li>
+    </ul>
+
+    <h2>3. 项目定位、迭代规划与商业背景</h2>
+    <h3>(1) 产品定位与参赛背景</h3>
+    <ul>
+      <li>挑战杯创新创业竞赛项目，面向Z世代大学生群体，区别于市面上泛健康APP，聚焦学生熬夜、备考等真实高压生活场景。</li>
+      <li>产品采用“线上测评推荐 + 线下药膳茶饮产品”商业模式；本阶段完成线上MVP版本，线下产品由合作康养集团落地。</li>
+    </ul>
+
+    <h3>(2) 技术演进路线：规则系统向AI推荐迭代</h3>
+    <ul>
+      <li>第一阶段当前MVP：基于if‑then业务规则完成体质‑场景匹配，快速验证产品假设。</li>
+      <li>第二阶段规划：采集匿名用户交互行为数据集，做特征工程。</li>
+      <li>第三阶段规划：接入协同过滤、基于内容的推荐算法，实现千人千面AI个性化健康方案。</li>
+    </ul>
+
+    <!-- 核心量化成果 -->
+    <div class="info-card">
+      <h2>核心量化成果</h2>
+      <ul>
+        <li>完成SpringBoot完整后端MVP，实现JWT鉴权、体质测评规则引擎、场景化方案推荐、药食同源知识库全套接口；</li>
+        <li>完成阿里云ECS+RDS部署，项目域名 <code>wenshengways.xyz</code> 正式可访问；</li>
+        <li>构建包含106种药食同源食材的结构化知识库，支撑养生方案生成；</li>
+        <li>输出完整后端API文档，支撑Flutter移动端、Web后台双端对接，支撑14人跨学科团队开发。</li>
+      </ul>
+    </div>
+
+    <p><strong>交付产物：</strong>SpringBoot后端源码、MyBatis数据库Mapper脚本、数据库初始化SQL、API接口文档、服务器部署配置、Git团队开发规范文档。</p>
+    <p><strong>技术栈：</strong>Java、SpringBoot、SpringSecurity、JWT、MyBatis、MySQL、阿里云ECS/RDS、Maven</p>
+
+    <!-- 代码仓库 & 项目说明 -->
+    <div class="info-card">
+      <h2>代码仓库 & 项目说明</h2>
+      <ul>
+        <li>
+          <strong>项目线上访问地址：</strong>
+          <a href="https://wenshengways.xyz" target="_blank">wenshengways.xyz</a>
+          <br>
+          <span style="font-size:0.9em;color:#444;">挑战杯参赛项目，Java SpringBoot后端MVP；前端Flutter由团队其他同学完成。</span>
+        </li>
+        <li>
+          <strong>项目备注：</strong>早期创业竞赛原型项目，整体为规则驱动MVP，AI个性化推荐属于规划的后续迭代版本，尚未落地实现。
+        </li>
+      </ul>
+    </div>
+
+    <p class="block-quote-note"><strong>对岗位的匹配点：</strong>具备Java‑SpringBoot企业级后端开发、JWT权限体系、MySQL数据建模、MyBatis开发、云服务器上线部署经验；拥有跨学科大型团队后端技术负责人经历，能够输出接口文档、制定团队开发规范，匹配Java后端、全栈开发岗位。</p>
+  </div>
+</details>
