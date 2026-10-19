@@ -47,13 +47,6 @@ redirect_from:
   
 > 以下为项目概览，完整技术细节、量化指标、项目演示请跳转项目页面查看：[项目经历](/portfolio/)
 
-<details class="fold">
-<summary>项目经历｜快速索引概览</summary>
-  
-<div markdown="1">
-  
-> 以下为项目概览，完整技术细节、量化指标、项目演示请点击标题跳转至对应项目详情：
-
 <h2 style="display: flex; justify-content: space-between; align-items: baseline;">
   <span>WebAR轻量化实景追踪系统 ｜ 算法与技术总负责人</span>
   <span style="font-weight: normal; color: #666;"><code>2025.09‑2026.01</code></span>
