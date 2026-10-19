@@ -105,7 +105,7 @@ redirect_from:
       <li><strong>推理优化与工程落地：</strong>底层实现<strong>“单基座常驻 + 多 Adapter 毫秒级热插拔”</strong>规避权重重复加载；设计强校验异常拦截、逆向惩罚状态机抑制模型输出发散，开发交互式多模型并发评测工具。</li>
       <li><strong>量化成果：</strong>模型整体准确率达到 <span class="highlight-text">91.54%</span>，F1 分数 <span class="highlight-text">0.9129</span>；大幅降低多模型切换显存开销，实现可交互的大模型批量评测能力。</li>
     </ul>
-    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>PyTorch、Llama-3、4bit 量化、DoRA、LoRA、QLoRA、Adapter 热插拔、大模型并发评测 · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/llama3-sentiment-concurrent" target="_blank">GitHub源码</a></p>
+    <p style="margin-top: -0.5em;"><strong>技术栈：</strong>PyTorch、matplotlib、LLaMA‑Factory、Llama‑3、4‑bit量化、DoRA、LoRA、QLoRA、Adapter热插拔、大模型并发评测、YAML、scikit‑learn、subprocess自动化调度 · <i class="fab fa-github"></i> <a href="https://github.com/Linsensn/llama3-sentiment-concurrent" target="_blank">GitHub源码</a></p>
   </div>
 </details>
 

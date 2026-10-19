@@ -69,7 +69,7 @@ redirect_from:
 </h2>
 
 针对复杂情感文本分析场景，基于 Llama3-8B 构建大模型量化微调与多模型交叉验证评测系统。<br>
-**技术栈：PyTorch、Llama‑3、4‑bit量化、DoRA、LoRA、QLoRA、Adapter热插拔、大模型并发评测** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/llama3-sentiment-concurrent)
+**技术栈：PyTorch、matplotlib、LLaMA‑Factory、Llama‑3、4‑bit量化、DoRA、LoRA、QLoRA、Adapter热插拔、大模型并发评测、YAML、scikit‑learn、subprocess自动化调度** · <i class="fab fa-github"></i> [GitHub 源码](https://github.com/Linsensn/llama3-sentiment-concurrent)
 
 </div>
 </details>
